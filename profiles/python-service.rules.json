@@ -1,0 +1,28 @@
+{
+  "profile": "python-service",
+  "required_files": [
+    "INDEX.md",
+    "SPEC.md"
+  ],
+  "recommended_files": [
+    "CHANGELOG.md"
+  ],
+  "required_index_sections": [
+    "## 职责",
+    "## 关键文件",
+    "## 依赖",
+    "## 快速验证"
+  ],
+  "required_spec_sections": [
+    "## 输入",
+    "## 输出",
+    "## 配置",
+    "## 错误处理",
+    "## 示例"
+  ],
+  "recommended_paths": [
+    "src",
+    "tests",
+    "configs"
+  ]
+}
