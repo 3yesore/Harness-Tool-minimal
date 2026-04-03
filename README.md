@@ -1,119 +1,134 @@
 # Harness Tool - Minimal
 
-**让 AI 安全接手任何模块的维护工作**
+**基于 Harness Engineering 的模块化工程规范工具**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/3yesore/harness-tool-minimal)
-[![Validate](https://github.com/3yesore/harness-tool-minimal/workflows/Validate%20Examples/badge.svg)](https://github.com/3yesore/harness-tool-minimal/actions)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/3yesore/Harness-Tool-minimal)
+[![Validate](https://github.com/3yesore/Harness-Tool-minimal/workflows/Validate%20Examples/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions)
 
 ---
 
-## 一句话
+## 什么是 Harness Engineering?
 
-通过标准化的 **INDEX.md**（索引）和 **SPEC.md**（接口规范），让 AI 能够跨会话、跨模型安全维护你的代码模块。
+Harness Engineering 是一套模块化工程方法论，通过**标准化索引**（INDEX.md）和**接口规范**（SPEC.md），让模块具备：
 
----
-
-## 核心问题
-
-传统 AI 辅助开发的三大痛点：
-
-❌ **每次都要重新理解整个项目** → 浪费时间和 token  
-❌ **缺少标准化接口** → AI 容易引入 bug  
-❌ **换个 AI 或新会话就要重新开始** → 无法持续维护
+- **可发现性**：通过索引快速定位模块职责和关键文件
+- **可理解性**：通过规范明确输入输出和错误处理
+- **可验证性**：通过测试确保模块正确性
+- **可交接性**：支持跨会话、跨工具、跨人员的稳定维护
 
 ---
 
-## Harness 解决方案
+## 核心价值
 
-✅ **INDEX.md** → AI 快速定位模块职责和关键文件  
-✅ **SPEC.md** → 明确输入输出和错误处理  
-✅ **tests/smoke.py** → 验证改动正确性  
-✅ **AI_CHECKLIST.md** → 标准化维护流程
+### 1. 降低认知负担
+不需要理解整个代码库，只需：
+- 读取 INDEX.md 了解模块职责
+- 读取 SPEC.md 了解接口约束
+- 按需阅读相关代码文件
 
-**结果**：任何 AI 都能通过索引快速接手，无需依赖历史对话上下文。
+### 2. 标准化接口
+- 输入输出格式明确
+- 错误处理统一
+- 配置与代码分离
+
+### 3. 强制验证
+- 每个模块必须有冒烟测试
+- 修改后必须通过验证
+- 明确的成功/失败标准
+
+### 4. 持续可维护
+- 变更历史可追溯（CHANGELOG.md）
+- 接口变更有记录
+- 支持长期演进
 
 ---
 
-## 10 秒快速开始
+## 快速开始
+
+### 初始化新模块
 
 ```bash
-# 1. 初始化新模块
 python tools/init_module.py my_module
+```
 
-# 2. 验证模块
+生成标准结构：
+```
+my_module/
+├── INDEX.md          # 模块索引
+├── SPEC.md           # 接口规范
+├── CHANGELOG.md      # 变更历史
+├── src/              # 源代码
+├── tests/            # 测试
+└── configs/          # 配置
+```
+
+### 验证模块合规性
+
+```bash
 python tools/validate_module.py my_module
+```
 
-# 3. 运行测试
-cd my_module && python tests/smoke.py
+### 查看示例
+
+```bash
+# 最小示例
+cd examples/hello_world && python tests/smoke.py
+
+# 中等复杂度示例（用户认证服务）
+cd examples/user_service && python tests/smoke.py
 ```
 
 ---
 
-## 真实示例
+## 核心组件
 
-### 最小示例：hello_world
-```bash
-cd examples/hello_world
-python tests/smoke.py
-```
-
-### 中等复杂度：user_service
-用户注册认证服务，展示：
-- 多文件组织
-- 配置管理
-- 完整错误处理
-- 多场景测试
-
-```bash
-cd examples/user_service
-python tests/smoke.py
-```
-
----
-
-## 核心特性
-
-### 📋 标准化结构
+### 📋 标准化文档
 - **INDEX.md**: 模块职责、关键文件、依赖关系
 - **SPEC.md**: 输入输出、配置、错误处理
 - **CHANGELOG.md**: 变更历史追踪
 
-### 🔧 开箱即用工具
-- **init_module.py**: 一键生成符合规范的模块骨架
-- **validate_module.py**: 自动检查模块合规性
-- **apply_harness.py**: 为现有模块半自动补 INDEX/SPEC 骨架
+### 🔧 工具链
+- **init_module.py**: 初始化符合规范的模块骨架
+- **validate_module.py**: 检查模块合规性
+- **apply_harness.py**: 为现有模块补充 Harness 文档
 
-### 🩺 AI 自修复能力
-- **AI_REPAIR_GUIDE.md**: 给 AI 的标准修复路径
-- 强调"先验证、再修复、再验证"
-- 不依赖额外自动修复器
+### 📚 完整示例
+- **hello_world**: 最小示例
+- **user_service**: 中等复杂度示例（多文件、配置管理、错误处理）
 
-### 🔌 OpenClaw 集成
-- 可作为 OpenClaw Skill 直接使用
-- 详见 `.openclaw_skill/SKILL.md`
+### 🔌 扩展支持
+- **profiles/**: 规则配置系统（支持自定义规范）
+- **OpenClaw Skill**: 可作为 OpenClaw 技能直接使用
+
+---
+
+## 设计原则
+
+### 索引优先 (Index-First)
+通过 INDEX.md 快速定位，而非全量扫描代码。
+
+### 规范化接口 (Standardized Interface)
+输入输出标准化，降低理解成本和出错风险。
+
+### 最小上下文 (Minimal Context)
+关键信息集中在索引和规范，代码按需阅读。
+
+### 可验证 (Verifiable)
+每个模块必须有测试，修改后必须验证。
+
+### 可交接 (Handoff-Ready)
+支持跨会话、跨工具、跨人员的稳定维护。
 
 ---
 
 ## 适用场景
 
-✅ 个人项目或小团队（< 10 模块）  
-✅ Vibecoding 开发模式  
-✅ 需要频繁切换 AI 模型或会话  
-✅ 希望代码可被 AI 长期维护  
-✅ 不想引入复杂依赖和工具链
-
----
-
-## 设计哲学
-
-> **不是让 AI 完全不依赖上下文，而是通过标准化降低依赖程度。**
-
-Harness Tool 的核心理念：
-- 通过**规范**赋能 AI，而非通过**自动化**代替 AI
-- 保持**轻量**（零外部依赖，< 100KB）
-- 强调**可验证**（测试必须通过）
-- 支持**可交接**（任何 AI 都能接手）
+✅ **模块化开发**：为每个模块建立清晰的边界和接口  
+✅ **团队协作**：统一的文档规范降低沟通成本  
+✅ **长期维护**：变更历史和接口规范支持持续演进  
+✅ **AI 辅助开发**：标准化文档让 AI 能够安全接手维护  
+✅ **代码重构**：为遗留代码补充索引和规范
 
 ---
 
@@ -131,17 +146,7 @@ Harness Tool 的核心理念：
 
 当前版本：**v1.0 Minimal** - 测试阶段
 
-更多功能和版本正在筹备中，敬请期待。
-
----
-
-## 快速链接
-
-- 📖 [开始使用](#10-秒快速开始)
-- 🎯 [查看示例](#真实示例)
-- 🤝 [贡献指南](CONTRIBUTING.md)
-- ❓ [常见问题](FAQ.md)
-- 📊 [GitHub Actions](.github/workflows/validate.yml)
+更多功能和版本正在筹备中。
 
 ---
 
@@ -172,9 +177,7 @@ MIT License - 详见 [LICENSE](LICENSE)
 ## 相关项目
 
 - [OpenClaw](https://github.com/openclaw/openclaw) - AI 助手框架
-- Harness Tool Fetcher - Codex/Claude 优化版（规划中）
-- Harness Tool Intruder - 企业版（规划中）
 
 ---
 
-**让 AI 成为你的长期代码维护伙伴。**
+**让模块化开发更规范、更可维护。**
