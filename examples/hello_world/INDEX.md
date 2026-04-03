@@ -14,7 +14,7 @@
 
 ## 快速验证
 ```bash
-python examples/hello_world/tests/smoke.py
+python tests/smoke.py
 ```
 
 ## 维护注意事项

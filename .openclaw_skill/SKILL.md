@@ -35,6 +35,29 @@ module_name/
 └── docs/              # Detailed docs (optional)
 ```
 
+## Quick Reference (5 Most Common Operations)
+
+```bash
+# 1. Initialize new module
+python scripts/init_harness_module.py my_module
+
+# 2. Apply harness to existing code
+python scripts/apply_harness.py existing_module
+
+# 3. Validate module compliance
+python scripts/validate_harness.py my_module
+
+# 4. Run module tests
+python my_module/tests/smoke.py
+
+# 5. Check what AI should read
+cat my_module/INDEX.md my_module/SPEC.md
+```
+
+**AI Workflow**: Read INDEX.md + SPEC.md → Code selectively → Change → Test → Update CHANGELOG
+
+See `references/` for full templates and detailed guidance.
+
 ## Quick Start
 
 ### Initialize New Module
