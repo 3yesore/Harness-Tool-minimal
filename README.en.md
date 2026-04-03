@@ -1,75 +1,79 @@
 # Harness Tool Minimal
 
-Harness Tool Minimal is the staging repository for a small Harness Engineering toolchain. It keeps module maintenance centered on `INDEX.md`, `SPEC.md`, a runnable smoke test, and a lightweight validation loop.
+Harness Tool Minimal is a Harness Engineering toolkit for module maintenance.
 
-The repository is currently Python-first and is organized for GitHub publication after validation.
+It keeps `INDEX.md`, `SPEC.md`, `tests/smoke.py`, and the change log in a small verifiable handoff loop, which fits long-lived modules and projects that need AI to take over safely.
 
-## What It Includes
+## Highlights
 
-- `tools/init_module.py` to create a new module skeleton
-- `tools/apply_harness.py` to retrofit an existing module with Harness docs and a smoke test
-- `tools/validate_module.py` to validate docs, configs, and smoke-test execution
-- `templates/` for `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
-- `profiles/` for validation and scaffolding presets
-- `examples/hello_world/` as the reference module
-- `.openclaw_skill/` as the packaged OpenClaw skill version of the same workflow
+- Minimal loop: initialize, retrofit, validate, record
+- Real execution: `validate_module.py` actually runs `tests/smoke.py`
+- Bilingual docs: Chinese primary docs plus English mirrors
+- Extensible: `profiles/`, `.openclaw_skill/`, and `templates/` are already in place
+- Publication-ready: the repository is organized for GitHub syncing
 
-## Core Workflow
+## Good Fit For
 
-1. Read the module `INDEX.md`
-2. Read the module `SPEC.md`
-3. Make the smallest relevant code change
-4. Run the smoke test
-5. Run the validator
-6. Update `CHANGELOG.md` when behavior changes
+- handing a module to AI for long-term maintenance
+- retrofitting legacy code with a minimal maintainable structure
+- keeping a fixed validation entry point after changes
+- turning a module into something easier to hand off
+- packaging the same skill for OpenClaw and Codex
 
-## Quick Start
-
-### Create a new module
+## 3-Minute Start
 
 ```bash
 python tools/init_module.py my_module
-```
-
-### Retrofit an existing module
-
-```bash
-python tools/apply_harness.py path/to/module
 python tools/apply_harness.py path/to/module --profile python-service
-```
-
-### Validate a module
-
-```bash
-python tools/validate_module.py path/to/module
-python tools/validate_module.py path/to/module --strict
 python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
-### Run the reference example
+## What It Includes
 
-```bash
-python examples/hello_world/tests/smoke.py
+- `tools/init_module.py`: create a new module skeleton
+- `tools/apply_harness.py`: retrofit an existing module with Harness
+- `tools/validate_module.py`: validate docs, configs, and smoke tests
+- `templates/`: templates
+- `profiles/`: rule presets
+- `examples/`: reference examples
+- `.openclaw_skill/`: a skill package installable into OpenClaw or Codex
+
+## Reference Examples
+
+- `examples/hello_world`: the smallest verifiable example
+- `examples/user_service`: a sample closer to a real project
+
+## Skill Installation
+
+### OpenClaw
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.openclaw\skills" | Out-Null
+Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.openclaw\skills\harness"
+```
+
+### Codex / VS Code
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
+Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harness"
 ```
 
 ## Documentation
 
-- [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md) for the repository-level contract
-- [INDEX.en.md](INDEX.en.md) for the repository map
-- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md) for release preparation
-- [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md) for the roadmap
-- [profiles/README.en.md](profiles/README.en.md) for profile status
-- [.openclaw_skill/SKILL.md](.openclaw_skill/SKILL.md) for the packaged skill
+- [INDEX.md](INDEX.md)
+- [HARNESS_SPEC.md](HARNESS_SPEC.md)
+- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)
+- [VERSION_ROADMAP.md](VERSION_ROADMAP.md)
+- [README.md](README.md)
 
 ## Current Status
 
-- The validation loop is working
-- The example module passes smoke testing
-- The skill package is synced to the current implementation
-- The repository is still the staging copy before GitHub publication
+Testing stage, with more features and adapter support still being added. Feedback is welcome.
 
-## Notes
+## Next Steps
 
-- This repository is intentionally minimal.
-- Profile rules are currently small and mostly mirror default behavior.
-- `apply_harness.py` still uses heuristics rather than deep source parsing.
+1. Read [INDEX.md](INDEX.md) for the repository map
+2. Read [HARNESS_SPEC.md](HARNESS_SPEC.md) for the contract
+3. Run `examples/hello_world/tests/smoke.py`
+4. Run `python tools/validate_module.py examples/hello_world --strict --profile python-service`
