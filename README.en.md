@@ -4,17 +4,16 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](VERSION_ROADMAP.md)
 
-Harness Tool Minimal is a Harness Engineering toolkit for module maintenance.
+A minimal Harness Engineering toolkit for module maintenance.
 
-It keeps `INDEX.md`, `SPEC.md`, `tests/smoke.py`, and the change log in a small verifiable handoff loop.
+It brings module entry points, specs, smoke tests, and change records into one verifiable handoff flow. It fits both staging cleanup and lightweight module onboarding.
 
-## Highlights
+## What you get
 
-- Minimal loop: initialize, retrofit, validate, record
-- Real execution: `validate_module.py` actually runs `tests/smoke.py`
-- Bilingual docs: Chinese primary docs plus English mirrors
-- Extensible: `profiles/`, `.openclaw_skill/`, and `templates/`
-- Publication-ready: organized for GitHub syncing
+- A minimal loop: initialize, retrofit, validate, record
+- Real validation: `validate_module.py` actually runs `tests/smoke.py`
+- Extensible structure: `profiles/`, `.openclaw_skill/`, and `templates/`
+- A release-friendly layout: Chinese primary docs, English mirrors, and GitHub Actions checks
 
 ## Quick Start
 
@@ -24,22 +23,28 @@ python tools/apply_harness.py path/to/module --profile python-service
 python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
-## Includes
+## Who it is for
+
+- People who want a module to be handoff-friendly and verifiable
+- People who need `INDEX.md`, `SPEC.md`, and `CHANGELOG.md` in an existing project
+- People who want the same workflow available in OpenClaw and Codex
+
+## What is included
 
 - `tools/init_module.py` to create a module skeleton
 - `tools/apply_harness.py` to retrofit an existing module
 - `tools/validate_module.py` to validate docs, configs, and smoke tests
-- `templates/` templates
-- `profiles/` rule presets
-- `examples/` reference examples
-- `.openclaw_skill/` skill package for OpenClaw / Codex
+- `templates/` for document templates
+- `profiles/` for rule presets
+- `examples/` for reference modules
+- `.openclaw_skill/` as the skill package for OpenClaw and Codex
 
 ## Examples
 
 - `examples/hello_world`
 - `examples/user_service`
 
-## Install Skill
+## Install the Skill
 
 ### Online Download
 
@@ -47,6 +52,7 @@ python tools/validate_module.py path/to/module --strict --profile python-service
 - Or use `Code` -> `Download ZIP` on the GitHub repository page
 
 After downloading, unzip it and copy the `.openclaw_skill` directory into your local skill directory.
+If your skill manager supports name-based install, you can also publish the package there and install it by name.
 
 ### OpenClaw
 
@@ -64,10 +70,11 @@ Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harn
 
 ## Documentation
 
-- [INDEX.md](INDEX.md)
-- [HARNESS_SPEC.md](HARNESS_SPEC.md)
-- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)
-- [VERSION_ROADMAP.md](VERSION_ROADMAP.md)
+- [docs/README.en.md](docs/README.en.md)
+- [INDEX.en.md](INDEX.en.md)
+- [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md)
+- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md)
+- [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md)
 - [README.md](README.md)
 
 ## Current Status

@@ -2,7 +2,7 @@
 
 ## Repository Overview
 
-Harness Tool Minimal is a lightweight Harness Engineering repository for module maintenance. It is designed to keep responsibilities, interfaces, validation, and handoff details in a small set of fixed files.
+Harness Tool Minimal is a lightweight Harness Engineering repository for module maintenance. It keeps responsibilities, interfaces, validation, and handoff details in a small set of fixed files.
 
 The current repository is a working minimal loop. Its core capabilities are:
 
@@ -10,7 +10,7 @@ The current repository is a working minimal loop. Its core capabilities are:
 - retrofit an existing module with Harness files
 - validate module docs, configuration, and smoke tests
 - use `profiles/` for lightweight rule presets
-- package the same workflow as an OpenClaw skill
+- package the same workflow as an OpenClaw / Codex skill
 - run basic GitHub Actions validation
 
 ## Repository Layout
@@ -27,9 +27,22 @@ harness_tool/
 ├── VERSION_ROADMAP.en.md
 ├── GITHUB_RELEASE.md
 ├── GITHUB_RELEASE.en.md
-├── RELEASE_NOTES_v1.0.md
 ├── LICENSE
-├── .gitignore
+├── docs/
+│   ├── README.md
+│   ├── README.en.md
+│   ├── AI_CHECKLIST.md
+│   ├── AI_REPAIR_GUIDE.md
+│   ├── CONTRIBUTING.md
+│   ├── DESIGN_REVIEW.md
+│   ├── FAQ.md
+│   ├── GITHUB_PUBLISH_GUIDE.md
+│   ├── RELEASE_NOTES_v1.0.md
+│   ├── AI_OPERATIONS.md
+│   ├── AI_OPERATIONS.en.md
+│   ├── EXTENSION_POINTS.md
+│   ├── EXTENSION_POINTS.en.md
+│   └── ...
 ├── .github/
 │   └── workflows/validate.yml
 ├── templates/
@@ -46,7 +59,6 @@ harness_tool/
 - [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md): repository-level Harness specification
 - [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md): version plan
 - [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md): GitHub release checklist
-- [RELEASE_NOTES_v1.0.md](RELEASE_NOTES_v1.0.md): current release notes
 
 ### Tools
 
@@ -75,6 +87,10 @@ harness_tool/
 
 - `.github/workflows/validate.yml`
 - `.openclaw_skill/SKILL.md`
+
+### Supporting Docs
+
+- [docs/README.en.md](docs/README.en.md): documentation hub
 
 ## Quick Start
 
@@ -111,7 +127,7 @@ python examples/user_service/tests/smoke.py
 - Module initialization works
 - Module retrofit works
 - Module validation works
-- The OpenClaw skill package is synced
+- The OpenClaw / Codex skill package is synced
 - GitHub Actions validation is available
 
 ## Version Info
