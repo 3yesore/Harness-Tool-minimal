@@ -1,48 +1,33 @@
-# Harness Tool - Minimal
+# Harness Tool Minimal
 
-**基于 Harness Engineering 的模块化工程规范工具**
+Harness Tool Minimal 是一个面向模块维护的 Harness Engineering 工具仓库。它的目标不是做成复杂框架，而是把模块的职责、接口、验证和交接信息收拢到少量固定文件里，方便人和 AI 接手维护。
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/3yesore/Harness-Tool-minimal)
-[![Validate](https://github.com/3yesore/Harness-Tool-minimal/workflows/Validate%20Examples/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions)
+当前仓库是一个可运行的最小闭环，核心能力包括：
 
----
+- 新建模块骨架
+- 为现有模块补 Harness 结构
+- 校验模块文档、配置和冒烟测试
+- 使用 `profiles/` 做轻量规则预设
+- 通过 `.openclaw_skill/` 提供 OpenClaw Skill 版本
+- 通过 GitHub Actions 做基础自动校验
 
-## 什么是 Harness Engineering?
+## 双语文档
 
-Harness Engineering 是一套模块化工程方法论，通过**标准化索引**（INDEX.md）和**接口规范**（SPEC.md），让模块具备：
+仓库现在维护两套并行文档：
 
-- **可发现性**：通过索引快速定位模块职责和关键文件
-- **可理解性**：通过规范明确输入输出和错误处理
-- **可验证性**：通过测试确保模块正确性
-- **可交接性**：支持跨会话、跨工具、跨人员的稳定维护
+- 中文版：`README.md`、`INDEX.md`、`HARNESS_SPEC.md`、`GITHUB_RELEASE.md`、`VERSION_ROADMAP.md`、`AI_OPERATIONS.md`、`EXTENSION_POINTS.md`
+- 英文版：`README.en.md`、`INDEX.en.md`、`HARNESS_SPEC.en.md`、`GITHUB_RELEASE.en.md`、`VERSION_ROADMAP.en.md`、`AI_OPERATIONS.en.md`、`EXTENSION_POINTS.en.md`
 
----
+如果你习惯英文文档，可以直接打开对应的 `.en.md` 文件。
 
-## 核心价值
+## 核心流程
 
-### 1. 降低认知负担
-不需要理解整个代码库，只需：
-- 读取 INDEX.md 了解模块职责
-- 读取 SPEC.md 了解接口约束
-- 按需阅读相关代码文件
-
-### 2. 标准化接口
-- 输入输出格式明确
-- 错误处理统一
-- 配置与代码分离
-
-### 3. 强制验证
-- 每个模块必须有冒烟测试
-- 修改后必须通过验证
-- 明确的成功/失败标准
-
-### 4. 持续可维护
-- 变更历史可追溯（CHANGELOG.md）
-- 接口变更有记录
-- 支持长期演进
-
----
+1. 先读模块的 `INDEX.md`
+2. 再读模块的 `SPEC.md`
+3. 只修改和任务直接相关的代码
+4. 跑冒烟测试
+5. 跑验证工具
+6. 行为变化时更新 `CHANGELOG.md`
 
 ## 快速开始
 
@@ -52,132 +37,47 @@ Harness Engineering 是一套模块化工程方法论，通过**标准化索引*
 python tools/init_module.py my_module
 ```
 
-生成标准结构：
-```
-my_module/
-├── INDEX.md          # 模块索引
-├── SPEC.md           # 接口规范
-├── CHANGELOG.md      # 变更历史
-├── src/              # 源代码
-├── tests/            # 测试
-└── configs/          # 配置
-```
-
-### 验证模块合规性
+### 为现有模块补 Harness
 
 ```bash
-python tools/validate_module.py my_module
+python tools/apply_harness.py path/to/module
+python tools/apply_harness.py path/to/module --profile python-service
 ```
 
-### 查看示例
+### 校验模块
 
 ```bash
-# 最小示例
-cd examples/hello_world && python tests/smoke.py
-
-# 中等复杂度示例（用户认证服务）
-cd examples/user_service && python tests/smoke.py
+python tools/validate_module.py path/to/module
+python tools/validate_module.py path/to/module --strict
+python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
----
-
-## 核心组件
-
-### 📋 标准化文档
-- **INDEX.md**: 模块职责、关键文件、依赖关系
-- **SPEC.md**: 输入输出、配置、错误处理
-- **CHANGELOG.md**: 变更历史追踪
-
-### 🔧 工具链
-- **init_module.py**: 初始化符合规范的模块骨架
-- **validate_module.py**: 检查模块合规性
-- **apply_harness.py**: 为现有模块补充 Harness 文档
-
-### 📚 完整示例
-- **hello_world**: 最小示例
-- **user_service**: 中等复杂度示例（多文件、配置管理、错误处理）
-
-### 🔌 扩展支持
-- **profiles/**: 规则配置系统（支持自定义规范）
-- **OpenClaw Skill**: 可作为 OpenClaw 技能直接使用
-
----
-
-## 设计原则
-
-### 索引优先 (Index-First)
-通过 INDEX.md 快速定位，而非全量扫描代码。
-
-### 规范化接口 (Standardized Interface)
-输入输出标准化，降低理解成本和出错风险。
-
-### 最小上下文 (Minimal Context)
-关键信息集中在索引和规范，代码按需阅读。
-
-### 可验证 (Verifiable)
-每个模块必须有测试，修改后必须验证。
-
-### 可交接 (Handoff-Ready)
-支持跨会话、跨工具、跨人员的稳定维护。
-
----
-
-## 适用场景
-
-✅ **模块化开发**：为每个模块建立清晰的边界和接口  
-✅ **团队协作**：统一的文档规范降低沟通成本  
-✅ **长期维护**：变更历史和接口规范支持持续演进  
-✅ **AI 辅助开发**：标准化文档让 AI 能够安全接手维护  
-✅ **代码重构**：为遗留代码补充索引和规范
-
----
-
-## 文档
-
-- [核心规范](HARNESS_SPEC.md) - 完整的 Harness 工程规范
-- [AI 检查清单](AI_CHECKLIST.md) - AI 维护模块的标准流程
-- [AI 修复指引](AI_REPAIR_GUIDE.md) - 验证失败时的修复路径
-- [主索引](INDEX.md) - 仓库结构说明
-- [FAQ](FAQ.md) - 常见问题解答
-
----
-
-## 版本状态
-
-当前版本：**v1.0 Minimal** - 测试阶段
-
-更多功能和版本正在筹备中。
-
----
-
-## OpenClaw Skill 安装
+### 运行示例
 
 ```bash
-# 复制到 OpenClaw skills 目录
-cp -r .openclaw_skill ~/.openclaw/skills/harness
-
-# 或 Windows
-xcopy /E /I .openclaw_skill %USERPROFILE%\.openclaw\skills\harness
+python examples/hello_world/tests/smoke.py
+python examples/user_service/tests/smoke.py
 ```
 
----
+## 文档入口
 
-## 贡献
+- [HARNESS_SPEC.md](HARNESS_SPEC.md) 仓库级规范
+- [INDEX.md](INDEX.md) 仓库结构说明
+- [README.en.md](README.en.md) 英文入口
+- [GITHUB_RELEASE.md](GITHUB_RELEASE.md) 发布准备
+- [VERSION_ROADMAP.md](VERSION_ROADMAP.md) 版本规划
+- [profiles/README.md](profiles/README.md) profile 状态说明
+- [.openclaw_skill/SKILL.md](.openclaw_skill/SKILL.md) OpenClaw Skill 入口
 
-欢迎提交 Issue 和 PR！详见 [CONTRIBUTING.md](CONTRIBUTING.md)
+## 当前状态
 
----
+- 验证链路已经跑通
+- 示例模块 `examples/hello_world` 可正常通过冒烟测试
+- skill 包和仓库实现保持同步
+- 当前仓库仍然是发布前的整理版，不是最终发布仓库
 
-## License
+## 备注
 
-MIT License - 详见 [LICENSE](LICENSE)
-
----
-
-## 相关项目
-
-- [OpenClaw](https://github.com/openclaw/openclaw) - AI 助手框架
-
----
-
-**让模块化开发更规范、更可维护。**
+- 本仓库保持 Python-first，但文档结构是模块化的
+- `apply_harness.py` 目前仍是启发式接入，不是深度源码分析器
+- profile 规则目前比较轻量，主要是把默认规则显式化

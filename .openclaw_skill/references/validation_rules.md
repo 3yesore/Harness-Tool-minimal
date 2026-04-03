@@ -1,59 +1,84 @@
-# Harness 验证规则
+# Harness Validation Rules
 
-## 必需文件
+## Required Files
 
 ### INDEX.md
-- 必须存在
-- 必须包含以下章节：
+- Must exist
+- Must contain:
   - `## 职责`
   - `## 关键文件`
   - `## 依赖`
   - `## 快速验证`
-- 推荐包含：
+- Recommended:
   - `## 维护注意事项`
   - `## 最后更新`
 
 ### SPEC.md
-- 必须存在
-- 必须包含以下章节：
+- Must exist
+- Must contain:
   - `## 输入`
   - `## 输出`
   - `## 配置`
   - `## 错误处理`
   - `## 示例`
 
-## 推荐文件
+## Recommended Files
 
 ### CHANGELOG.md
-- 推荐存在
-- 应记录所有重要变更
-- 格式：日期 + 变更类型 + 描述
+- Recommended
+- Should record the important history of the module
+- Suggested format: date + change type + description
 
 ### tests/
-- 必须存在目录
-- 应包含至少一个可执行测试
-- 测试应有清晰的成功/失败输出
+- Must exist
+- Should contain at least one runnable `.py` test
+- The test should print clear pass/fail output
+- `tests/smoke.py` is the preferred entry point
 
 ### configs/
-- 可选目录
-- 如果存在，配置文件必须是有效的 JSON/YAML
+- Optional
+- If present, JSON files must be valid
 
-## 验证级别
+## Profile Rules
 
-### 错误（Error）
-- 缺少必需文件
-- 必需章节缺失
-- 配置文件格式错误
-- 测试目录不存在
+Profiles are loaded from `profiles/*.rules.json` and can adjust:
 
-### 警告（Warning）
-- 缺少推荐文件
-- 推荐章节缺失
-- 测试目录为空
-- 配置目录不存在（如果模块需要配置）
+- required files
+- recommended files
+- required `INDEX.md` sections
+- required `SPEC.md` sections
+- recommended directories for scaffolding
 
-## 严格模式
+The bundled profiles are intentionally minimal:
 
-使用 `--strict` 标志时：
-- 所有警告视为错误
-- 验证失败会返回非零退出码
+- `default`
+- `python-service`
+
+## Validation Levels
+
+### Errors
+- missing required files
+- missing required sections
+- invalid config files
+- missing tests directory
+
+### Warnings
+- missing recommended files
+- missing recommended sections
+- empty tests directory
+- missing configs directory when a module should have one
+
+## Strict Mode
+
+When `--strict` is enabled:
+
+- warnings are treated as errors
+- validation fails with a non-zero exit code
+
+## Smoke Test Execution
+
+The validator executes `tests/smoke.py` when it exists.
+
+- it must exit `0` on success
+- it must provide clear output
+- it should cover the module's main path, not just importability

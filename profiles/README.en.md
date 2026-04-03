@@ -1,8 +1,9 @@
 # Profiles
 
-Profiles are now wired into the CLI through `--profile`.
+Profiles are wired into the CLI through `--profile`.
 
 ## Current Files
+
 - `default.rules.json`
 - `python-service.rules.json`
 

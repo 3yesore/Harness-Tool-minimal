@@ -41,7 +41,7 @@ Likely additions:
 
 ## Release Policy
 
-- Keep `v1.x` backwards compatible with the current module layout
+- Keep `v1.x` backward compatible with the current module layout
 - Keep the skill package synced with repository behavior
 - Prefer incremental changes that can be validated with the example module
 

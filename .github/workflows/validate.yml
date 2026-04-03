@@ -1,45 +1,27 @@
-name: Validate Examples
+name: Validate Harness Tool
 
 on:
   push:
-    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    
-    - name: Validate hello_world
-      run: |
-        python tools/validate_module.py examples/hello_world
-    
-    - name: Run hello_world tests
-      run: |
-        cd examples/hello_world
-        python tests/smoke.py
-    
-    - name: Validate user_service
-      run: |
-        python tools/validate_module.py examples/user_service
-    
-    - name: Run user_service tests
-      run: |
-        cd examples/user_service
-        python tests/smoke.py
-    
-    - name: Check repository structure
-      run: |
-        test -f HARNESS_SPEC.md
-        test -f AI_CHECKLIST.md
-        test -f AI_REPAIR_GUIDE.md
-        test -f README.md
-        test -f LICENSE
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile scripts
+        run: python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py .openclaw_skill/scripts/init_harness_module.py .openclaw_skill/scripts/apply_harness.py .openclaw_skill/scripts/validate_harness.py
+
+      - name: Validate reference example
+        run: python tools/validate_module.py examples/hello_world --strict --profile python-service
+
+      - name: Validate skill packaging
+        run: python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service

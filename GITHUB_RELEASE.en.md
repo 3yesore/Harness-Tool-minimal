@@ -2,11 +2,11 @@
 
 This repository is the staging copy. Before updating the publish repository, keep the working tree clean, verify the example module, and sync the OpenClaw skill package.
 
-## 1. Pre-release checklist
+## 1. Pre-release Checklist
 
 1. Run the repository validators.
 2. Confirm `examples/hello_world` still passes smoke testing.
-3. Make sure no temporary files or local build artifacts are left in the tree.
+3. Make sure no temporary files or local build artifacts remain.
 4. Sync `.openclaw_skill/` with the current implementation.
 
 Recommended checks:
@@ -28,9 +28,9 @@ git branch -M main
 git push -u origin main
 ```
 
-If the publish repository is separate from this staging repo, copy the reviewed contents there first, then repeat the same validation commands.
+If the publish repository is separate from this staging repository, copy the reviewed contents there first, then repeat the same validation commands.
 
-## 3. Suggested release notes
+## 3. Suggested Release Notes
 
 ```markdown
 ## Initial Harness Tool Release
@@ -47,9 +47,9 @@ Validation:
 - `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
 ```
 
-## 4. After release
+## 4. After Release
 
 1. Tag the release, for example `v1.0.0`.
 2. Add a short GitHub release description.
-3. Verify the repository README and skill package still match the published behavior.
-4. Record the release date in `VERSION_ROADMAP.md` if the roadmap changed.
+3. Verify that the repository README and skill package still match the published behavior.
+4. Record the release date in `VERSION_ROADMAP.en.md` if the roadmap changed.
