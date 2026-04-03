@@ -53,6 +53,11 @@ harness_tool/
 ### 工具脚本
 - **tools/init_module.py**: 初始化新模块,自动生成标准结构
 - **tools/validate_module.py**: 验证模块是否符合 Harness 规范
+- **tools/apply_harness.py**: 给现有模块补最小 harness 骨架
+
+### AI 指引
+- **AI_CHECKLIST.md**: AI 接手维护时的检查清单
+- **AI_REPAIR_GUIDE.md**: AI 在验证失败时的标准修复流程
 
 ### 示例模块
 - **examples/hello_world/**: 完整的参考实现,展示所有规范要求

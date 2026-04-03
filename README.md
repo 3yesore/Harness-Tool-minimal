@@ -67,6 +67,12 @@ python tests/smoke.py
 ### 🔧 开箱即用工具
 - **init_module.py**: 一键生成符合规范的模块骨架
 - **validate_module.py**: 自动检查模块合规性
+- **apply_harness.py**: 为现有模块半自动补 INDEX/SPEC/CHANGELOG 骨架
+
+### 🩺 AI 修复能力
+- **AI_REPAIR_GUIDE.md**: 给 AI 的标准修复路径
+- 强调“先验证、再修复、再验证”
+- 不依赖额外自动修复器
 
 ### ✅ 完整示例
 - **hello_world**: 包含完整实现的参考模块
