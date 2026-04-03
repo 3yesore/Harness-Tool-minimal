@@ -37,6 +37,13 @@ python tools/validate_module.py path/to/module --strict --profile python-service
 
 ## Install Skill
 
+### Online Download
+
+- [Download the skill ZIP](https://github.com/3yesore/Harness-Tool-minimal/archive/refs/heads/main.zip)
+- Or use `Code` -> `Download ZIP` on the GitHub repository page
+
+After downloading, unzip it and copy the `.openclaw_skill` directory into your local skill directory.
+
 ### OpenClaw
 
 ```powershell
