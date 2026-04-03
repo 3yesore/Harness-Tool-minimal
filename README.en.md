@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](VERSION_ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](docs/VERSION_ROADMAP.md)
 
 A minimal Harness Engineering toolkit for module maintenance.
 
@@ -71,10 +71,6 @@ Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harn
 ## Documentation
 
 - [docs/README.en.md](docs/README.en.md)
-- [INDEX.en.md](INDEX.en.md)
-- [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md)
-- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md)
-- [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md)
 - [README.md](README.md)
 
 ## Current Status

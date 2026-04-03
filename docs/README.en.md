@@ -5,10 +5,10 @@ This folder collects supporting docs and release materials. The repository root 
 ## Start Here
 
 - [README.en.md](../README.en.md)
-- [INDEX.en.md](../INDEX.en.md)
-- [HARNESS_SPEC.en.md](../HARNESS_SPEC.en.md)
-- [GITHUB_RELEASE.en.md](../GITHUB_RELEASE.en.md)
-- [VERSION_ROADMAP.en.md](../VERSION_ROADMAP.en.md)
+- [INDEX.en.md](INDEX.en.md)
+- [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md)
+- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md)
+- [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md)
 
 ## Supporting Docs
 
