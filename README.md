@@ -1,5 +1,9 @@
 # Harness Tool Minimal
 
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](VERSION_ROADMAP.md)
+[![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
+
 面向模块维护的 Harness Engineering 工具。
 
 它把 `INDEX.md`、`SPEC.md`、`tests/smoke.py` 和变更记录收拢成一套可验证、可交接的最小闭环。
