@@ -1,0 +1,6 @@
+{
+  "db_path": "users_dev.db",
+  "jwt_expiry": 3600,
+  "max_login_attempts": 3,
+  "lockout_duration": 900
+}

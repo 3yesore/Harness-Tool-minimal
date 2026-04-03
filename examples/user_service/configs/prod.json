@@ -1,0 +1,6 @@
+{
+  "db_path": "/var/lib/userservice/users.db",
+  "jwt_expiry": 7200,
+  "max_login_attempts": 5,
+  "lockout_duration": 1800
+}
