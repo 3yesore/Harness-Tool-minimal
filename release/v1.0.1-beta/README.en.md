@@ -36,6 +36,7 @@ It keeps the smallest complete Harness workflow while clarifying the standard en
 - `GITHUB_RELEASE.zh.md` / `GITHUB_RELEASE.en.md`
 - `MANIFEST.md`
 - `PUBLISH_CHECKLIST.zh.md` / `PUBLISH_CHECKLIST.en.md`
+- `UPGRADE_CHECKLIST.zh.md` / `UPGRADE_CHECKLIST.en.md`
 
 ## Version description
 
@@ -43,4 +44,3 @@ See the full version description here:
 
 - [VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)
 - [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md)
-
