@@ -77,9 +77,9 @@ git push -u origin main
 
 1. 点击 "Releases" → "Create a new release"
 2. 填写信息：
-   - **Tag**: `v1.0.0`
-   - **Release title**: `Harness Tool v1.0 - Minimal Edition`
-   - **Description**: 复制 `RELEASE_NOTES_v1.0.md` 的内容
+   - **Tag**: `v1.0.1-beta`
+   - **Release title**: `Harness Tool Minimal v1.0.1 beta`
+   - **Description**: 复制 `release/v1.0.1-beta/GITHUB_RELEASE.zh.md` 的内容
 3. 点击 "Publish release"
 
 ---

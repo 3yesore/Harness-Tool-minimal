@@ -2,8 +2,8 @@
 
 ## Current Version
 
-- `v1.0 Minimal`
-- Status: usable, verifiable, and ready for GitHub publication
+- `v1.0.1 beta`
+- Status: beta freeze, ready for GitHub publication
 - Focus: single-module maintenance, smoke-test validation, and OpenClaw skill packaging
 
 ## What v1.0 Includes

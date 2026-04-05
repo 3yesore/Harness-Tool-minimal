@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](docs/VERSION_ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](docs/VERSION_ROADMAP.md)
 
 面向模块维护的 Harness Engineering 最小工具集。
 
@@ -75,4 +75,4 @@ Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harn
 
 ## 当前状态
 
-测试阶段，后续功能和适配还在更新，欢迎反馈。
+v1.0.1 beta，当前以基线加固和标准化扩展入口为主，仍建议在小项目、小模块和开发初期使用。欢迎反馈。

@@ -31,7 +31,7 @@ git push
 ## 推荐发布说明
 
 ```markdown
-## Harness Tool Minimal v1.0
+## Harness Tool Minimal v1.0.1 beta
 
 Highlights:
 - modular handoff flow with `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
@@ -52,7 +52,7 @@ Validation:
 
 ## 发布后
 
-1. 打上版本标签，例如 `v1.0.0`。
+1. 打上版本标签，例如 `v1.0.1-beta`。
 2. 补一条简短的 GitHub Release 描述。
 3. 确认 README、release 页和 skill 包口径一致。
 4. 如果路线图变了，更新 `VERSION_ROADMAP.md`。

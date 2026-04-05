@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](docs/VERSION_ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](docs/VERSION_ROADMAP.md)
 
 A minimal Harness Engineering toolkit for module maintenance.
 
@@ -75,4 +75,4 @@ Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harn
 
 ## Current Status
 
-Testing stage, with more features and adapter support still being added. Feedback is welcome.
+v1.0.1 beta, focused on baseline hardening and standardized extension entrances. It is still best suited for small projects, small modules, and early-stage development. Feedback is welcome.

@@ -31,7 +31,7 @@ If the publish repository is separate from this staging repository, copy the rev
 ## Suggested Release Notes
 
 ```markdown
-## Harness Tool Minimal v1.0
+## Harness Tool Minimal v1.0.1 beta
 
 Highlights:
 - module handoff flow with `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
@@ -52,7 +52,7 @@ Validation:
 
 ## After Release
 
-1. Tag the release, for example `v1.0.0`.
+1. Tag the release, for example `v1.0.1-beta`.
 2. Add a short GitHub release description.
 3. Verify that the README, release page, and skill package still match the published behavior.
 4. Update `VERSION_ROADMAP.en.md` if the roadmap changed.

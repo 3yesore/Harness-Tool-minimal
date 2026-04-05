@@ -132,6 +132,6 @@ python examples/user_service/tests/smoke.py
 
 ## Version Info
 
-- Current version: `v1.0.0 Minimal`
+- Current version: `v1.0.1 beta`
 - Spec version: `v1.0`
 - Status: runnable, verifiable, and ready for publication cleanup
