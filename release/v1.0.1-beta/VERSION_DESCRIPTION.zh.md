@@ -1,41 +1,49 @@
 # v1.0.1 beta 版本说明
 
+## 版本定位
+
+`Harness Tool Minimal v1.0.1 beta` 是一次围绕 minimal 基线做的冻结发布。  
+它的重点不是把工具做厚，而是把最小闭环、合同边界、验证口径和扩展入口进一步收紧并固化，使仓库可以作为长期可维护的开发框架底座继续使用。
+
 ## 版本名称
 
 - `Harness Tool Minimal v1.0.1 beta`
 
 ## 一句话说明
 
-- 这是一次围绕 minimal 基线做的 beta 发布，重点不是扩张功能，而是把最小闭环做稳、把标准入口做清楚、把扩展边界做明确。
+- 这是一次基线加固型 beta 发布：核心更薄、合同更硬、扩展入口更清楚，同时保留足够大的项目级自定义空间。
 
 ## 核心变化
 
-- 继续保持 `init / apply / validate` 的最小闭环，确保模块接入、校验和交接流程一致。
-- 继续保留 `INDEX.md`、`SPEC.md`、`CHANGELOG.md` 和 `tests/smoke.py` 这套最小可交接结构。
-- `profiles/`、`templates/` 和 `.openclaw_skill/` 继续作为轻量扩展面，而不是厚重平台。
-- GitHub Actions 继续承担基础自动校验职责，保证仓库状态可验证。
-- 中文主页和英文镜像继续并存，适合发布和分发。
+- `init / apply / validate` 继续统一到同一套核心模型，避免入口脚本各自维护不同逻辑。
+- `harness_core/` 已成为共享底座，承担 `ContractRules`、`ModuleContext`、`ValidationResult`、`ScaffoldPlan` 等核心类型和编排逻辑。
+- `INDEX.md`、`SPEC.md`、`validate` 的 marker 语义已经对齐，关键路径、入口和耦合点可以被快速识别。
+- 默认一致性模式保持 `soft`，把收口限定在原则层面，不把不同项目的入口结构锁死。
+- `profiles/`、`templates/` 与 `.openclaw_skill/` 仍然只承担轻量预设、默认骨架和分发镜像职责，不向 core 里收拢成厚重平台。
+- 本地扩展示例已经补齐，说明项目可以自己在本地挂接扩展，而不是依赖 core 内置的扩展运行时。
 
 ## 对外承诺
 
-- 这版最适合小项目、小模块、开发初期使用。
-- 它提供的是最小但完整的 Harness 工作流，不是大而全的平台。
-- 用户可以在现有结构上继续做项目级自定义，但仍然遵守最小合同。
-- 后续如果需要更大结构或更多自动化能力，会在实际测试和反馈基础上逐步推进。
+- 适合小项目、小模块、开发初期场景。
+- 适合从一开始就按 Harness 方式组织模块、规范和验证。
+- 适合需要 AI 参与维护、但又希望上下文可恢复、可交接的工程流程。
+- 不承诺把所有大型项目场景一次性覆盖完；更大的结构和更多自动化能力会基于实际测试和反馈逐步评估。
 
 ## 验证结果
 
-以下命令已经在仓库中通过验证：
+以下命令在仓库中通过验证：
 
 - `python tools/validate_module.py examples/hello_world --strict --profile python-service`
 - `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
 - `python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py`
+- `python examples/local_extension/harness/run_harness.py`
 
 ## 风险说明
 
-- 当前版本的扩展面仍然是轻量型的，适合项目级约定，不是统一运行时平台。
-- 版本仍然遵循 minimal 原则，所以不会把核心做厚。
-- 如果项目规模较大，建议结合 `profiles/`、`templates/` 和现有示例逐步定制，不要期待这一版就覆盖所有大型工程场景。
+- 当前版本的扩展挂载是“示例优先、项目本地实现”的路线，不是统一运行时平台。
+- 默认 marker / 入口一致性采用 `soft` 模式，灵活性保留了，但项目侧仍需要维护本地约定。
+- 为保持 minimal，core 不会继续往平台化方向堆 mode 和旋钮，因此更细的控制应通过项目本地扩展实现。
+- 如果项目已经是较大规模、多入口、多团队协作的工程，建议把这版作为基础层，而不是把它当作完整的平台替代品。
 
 ## 回滚锚点
 
@@ -45,12 +53,15 @@
 
 下面这些事实已经在仓库里验证过，可以安全写进版本说明：
 
-- 仓库当前核心能力包括初始化模块、为现有模块补 Harness、以及验证模块文档和冒烟测试。
-- `examples/hello_world` 和 `examples/user_service` 都是当前仓库中的参考示例。
-- `profiles/`、`templates/` 和 `.openclaw_skill/` 确实存在，并且是当前扩展和分发的主要入口。
-- 默认使用 `v1.0.0` 作为历史锚点，`v1.0.1 beta` 作为当前 beta 冻结版本。
+- 核心已经收口到 `harness_core/`，`init / apply / validate` 共享同一套核心模型。
+- `INDEX.md`、`SPEC.md`、`validate` 的 marker 口径已经对齐。
+- 默认一致性模式仍然是 `soft`，不会把项目自定义空间锁死。
+- 本地扩展示例已经补齐，并且 `run_harness.py` 可以直接运行。
+- 扩展挂载保持为示例优先和项目本地实现，不由 core 托管完整运行时。
+- `v1.0.1 beta` 是独立的冻结基线，不与上一版本口径混用。
 
 ## 建议发布口径
 
-- 本次更新简而言之是一些基线加固工作和开放了一些标准化拓展，并且都是在 minimal 基础上做的稳定性建设。但目前仍建议在小项目小模块的开发初期使用。具体更新内容请移步（[VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)），后续会根据我实际测试推出更多的扩展和大结构更新，届时会根据社区反响尝试往大型项目的方向推进，敬请期待，欢迎讨论！
-
+- 本次更新是一次面向 minimal 基线的加固型 beta 发布，重点放在稳定性、交接性与标准化入口。
+- 当前仍然更适合小项目、小模块、开发初期使用。
+- 具体更新内容请结合 release 正文和版本说明查看；后续会根据实际测试和社区反馈，再决定是否向更大结构和更多扩展能力演进。
