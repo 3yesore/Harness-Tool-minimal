@@ -1,27 +1,37 @@
-# Harness Tool Minimal v1.0.1 beta
+# Harness Tool Minimal v1.0.1 Historical Baseline
 
-In short, this update hardens the baseline and opens some standardized extension entrances, all still built on the minimal foundation for stability. It is still recommended for small projects and small modules at the start of development. For the full change list, see [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md). More extensions and larger structural updates may follow based on real-world testing and community feedback. We welcome discussion.
+`v1.0.1 beta` is the frozen minimal baseline for this project.  
+It is no longer positioned as a platform-expansion experiment. Instead, it serves as a historical baseline display page that can be used as a stable reference.
 
-## Release Summary
+For the full version description, risk boundaries, and release resources, see [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md).  
+If you want the short historical view, see [DISPLAY_PAGE.en.md](DISPLAY_PAGE.en.md).
 
-- Keep the minimal loop: `init / apply / validate`
-- Keep the standardized module entry points: `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
-- Keep lightweight extension surfaces: `profiles/`, `templates/`, and `.openclaw_skill/`
-- Keep GitHub Actions baseline validation
-- Keep the Chinese primary homepage plus English mirror release format
+## What this release shows
 
-## Validation Commands
+- Minimal loop: `init / apply / validate`
+- Standardized module entry points: `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
+- Lightweight extension surfaces: `profiles/`, `templates/`, and `.openclaw_skill/`
+- Default consistency mode: `soft`
+- Extension style: example-first, project-local implementation
+
+## Why it is worth keeping
+
+- It consolidates module development, validation, handoff, and records into a small set of fixed files.
+- It preserves room for project-level customization without making the core thick.
+- It is suitable for small projects, small modules, and early-stage development.
+- It serves as the historical baseline for later experiments and future expansion.
+
+## Validation commands
 
 ```bash
 python tools/validate_module.py examples/hello_world --strict --profile python-service
 python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service
 python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py
+python examples/local_extension/harness/run_harness.py
 ```
 
-## Release Notes
+## Release notes
 
-- This is the freeze release for `v1.0.1 beta`.
 - Rollback anchor: `v1.0.0`
-- Best suited for small projects, small modules, and early-stage development.
-- Further structural expansion will depend on testing and feedback.
-
+- Page role: historical baseline display page
+- Recommended use: reference baseline for later experiments and extension backflow

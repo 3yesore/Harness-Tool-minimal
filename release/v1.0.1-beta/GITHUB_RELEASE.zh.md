@@ -1,25 +1,25 @@
-# Harness Tool Minimal v1.0.1 beta
+# Harness Tool Minimal v1.0.1 历史基线
 
-本次更新简而言之是围绕 minimal 基线做了一轮加固，并开放了若干标准化扩展入口，但整体仍然以稳定性、交接性和工程边界收口为主。  
-如果你需要完整的版本说明、验证范围和风险边界，请移步：[VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)。  
-当前版本仍然更适合小项目、小模块和开发初期使用；后续会根据实际测试和社区反馈，逐步评估更大结构与更多扩展能力的演进方向。
+`v1.0.1 beta` 代表这套 minimal 基线的冻结版本。  
+它已经不是一个继续向平台化扩张的试验版，而是一个可以作为历史基线长期参考的展示页版本。
 
-## 这次发布的重点
+如果你要看完整的版本说明、风险边界和资源包内容，请移步：[VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)。  
+如果你想直接看这版的历史基线展示，请移步：[DISPLAY_PAGE.zh.md](DISPLAY_PAGE.zh.md)。
 
-- 保持最小闭环：`init / apply / validate`
-- 保持标准化模块入口：`INDEX.md`、`SPEC.md`、`CHANGELOG.md`
-- 保持轻量扩展面：`profiles/`、`templates/`、`.openclaw_skill/`
-- 保持 GitHub Actions 基础验证
-- 保持中文主页 + 英文镜像的发布形式
+## 这版展示什么
 
-## 为什么这版是 beta 冻结
+- 最小闭环：`init / apply / validate`
+- 标准化模块入口：`INDEX.md`、`SPEC.md`、`CHANGELOG.md`
+- 轻量扩展面：`profiles/`、`templates/`、`.openclaw_skill/`
+- 默认一致性模式：`soft`
+- 扩展方式：示例优先、项目本地实现
 
-- 核心已经收口到 `harness_core/`
-- `init / apply / validate` 统一到同一套核心模型
-- `INDEX.md`、`SPEC.md`、`validate` 的 marker 语义已经对齐
-- 默认一致性模式保持 `soft`
-- 扩展保持示例优先、项目本地实现，而不是 core-owned runtime
-- 本地扩展示例已经补齐并可运行
+## 为什么它值得保留
+
+- 它把模块开发、验证、交接和记录收束到少量固定文件中。
+- 它保留了项目级自定义空间，同时不让 core 变厚。
+- 它适合小项目、小模块、开发初期的持续使用。
+- 它是后续扩展、实验和回流的历史基线。
 
 ## 验证命令
 
@@ -32,7 +32,6 @@ python examples/local_extension/harness/run_harness.py
 
 ## 发布说明
 
-- 这是 `v1.0.1 beta` 的冻结发布。
 - 回滚锚点：`v1.0.0`
-- 适合小项目、小模块、开发初期使用。
-- 后续扩展和更大结构会基于测试和反馈继续评估。
+- 本页定位：历史基线展示页
+- 推荐使用方式：作为后续实验和扩展回流的参考基线
