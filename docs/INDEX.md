@@ -2,9 +2,9 @@
 
 ## 仓库概览
 
-Harness Tool Minimal 是一套面向模块维护的 Harness Engineering 工具仓库。它的目标不是做成复杂框架，而是把模块职责、接口、验证和交接信息收拢到少量固定文件里，方便人和 AI 接手。
+Harness Tool Minimal 当前默认展示 `v1.0.1 beta`。它是一套面向模块开发与维护的 Harness Engineering 工具仓库，目标不是做成复杂框架，而是把模块职责、接口、验证和交接信息收拢到少量固定文件里，方便人和 AI 接手。
 
-当前仓库已经是可运行的最小闭环，核心能力包括：
+当前仓库已经形成可运行的最小闭环，核心能力包括：
 
 - 新建模块骨架
 - 为现有模块补 Harness 结构
@@ -29,22 +29,22 @@ harness_tool/
 ├── GITHUB_RELEASE.en.md
 ├── LICENSE
 ├── docs/
-│   ├── README.md
-│   ├── README.en.md
-│   ├── AI_CHECKLIST.md
-│   ├── AI_REPAIR_GUIDE.md
-│   ├── CONTRIBUTING.md
-│   ├── DESIGN_REVIEW.md
-│   ├── FAQ.md
-│   ├── GITHUB_PUBLISH_GUIDE.md
-│   ├── RELEASE_NOTES_v1.0.md
-│   ├── AI_OPERATIONS.md
-│   ├── AI_OPERATIONS.en.md
-│   ├── EXTENSION_POINTS.md
-│   ├── EXTENSION_POINTS.en.md
-│   └── ...
+│  ├── README.md
+│  ├── README.en.md
+│  ├── AI_CHECKLIST.md
+│  ├── AI_REPAIR_GUIDE.md
+│  ├── CONTRIBUTING.md
+│  ├── DESIGN_REVIEW.md
+│  ├── FAQ.md
+│  ├── GITHUB_PUBLISH_GUIDE.md
+│  ├── RELEASE_NOTES_v1.0.md
+│  ├── AI_OPERATIONS.md
+│  ├── AI_OPERATIONS.en.md
+│  ├── EXTENSION_POINTS.md
+│  ├── EXTENSION_POINTS.en.md
+│  └── ...
 ├── .github/
-│   └── workflows/validate.yml
+│  └── workflows/validate.yml
 ├── templates/
 ├── tools/
 ├── examples/
@@ -76,6 +76,7 @@ harness_tool/
 
 - `examples/hello_world/`：最小参考示例，验证链路最清晰
 - `examples/user_service/`：稍复杂的参考示例，包含多文件和配置
+- `examples/local_extension/`：本地扩展示例，演示项目自己挂扩展
 
 ### 配置预设
 
@@ -90,7 +91,7 @@ harness_tool/
 
 ### 辅助文档
 
-- [docs/README.md](docs/README.md)：文档中心索引
+- [docs/README.md](docs/README.md)：文档中心
 
 ## 快速上手
 
@@ -145,5 +146,5 @@ python examples/user_service/tests/smoke.py
 
 - 当前版本：`v1.0.1 beta`
 - 规范版本：`v1.0`
-- 当前状态：可运行、可验证、适合发布前整理
-- 最后更新：2026-04-05
+- 当前状态：可运行、可验证、适合当前仓库默认展示
+- 最后更新：2026-04-06

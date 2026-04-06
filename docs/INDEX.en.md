@@ -2,9 +2,9 @@
 
 ## Repository Overview
 
-Harness Tool Minimal is a lightweight Harness Engineering repository for module maintenance. It keeps responsibilities, interfaces, validation, and handoff details in a small set of fixed files.
+Harness Tool Minimal currently defaults to `v1.0.1 beta`. It is a lightweight Harness Engineering repository for module development and maintenance. It keeps responsibilities, interfaces, validation, and handoff details in a small set of fixed files so both humans and AI can pick up work quickly.
 
-The current repository is a working minimal loop. Its core capabilities are:
+The current repository has a working minimal loop. Its core capabilities are:
 
 - create a new module skeleton
 - retrofit an existing module with Harness files
@@ -29,22 +29,22 @@ harness_tool/
 ├── GITHUB_RELEASE.en.md
 ├── LICENSE
 ├── docs/
-│   ├── README.md
-│   ├── README.en.md
-│   ├── AI_CHECKLIST.md
-│   ├── AI_REPAIR_GUIDE.md
-│   ├── CONTRIBUTING.md
-│   ├── DESIGN_REVIEW.md
-│   ├── FAQ.md
-│   ├── GITHUB_PUBLISH_GUIDE.md
-│   ├── RELEASE_NOTES_v1.0.md
-│   ├── AI_OPERATIONS.md
-│   ├── AI_OPERATIONS.en.md
-│   ├── EXTENSION_POINTS.md
-│   ├── EXTENSION_POINTS.en.md
-│   └── ...
+│  ├── README.md
+│  ├── README.en.md
+│  ├── AI_CHECKLIST.md
+│  ├── AI_REPAIR_GUIDE.md
+│  ├── CONTRIBUTING.md
+│  ├── DESIGN_REVIEW.md
+│  ├── FAQ.md
+│  ├── GITHUB_PUBLISH_GUIDE.md
+│  ├── RELEASE_NOTES_v1.0.md
+│  ├── AI_OPERATIONS.md
+│  ├── AI_OPERATIONS.en.md
+│  ├── EXTENSION_POINTS.md
+│  ├── EXTENSION_POINTS.en.md
+│  └── ...
 ├── .github/
-│   └── workflows/validate.yml
+│  └── workflows/validate.yml
 ├── templates/
 ├── tools/
 ├── examples/
@@ -76,6 +76,7 @@ harness_tool/
 
 - `examples/hello_world/`: the smallest reference module
 - `examples/user_service/`: a more complex sample with multiple files and configs
+- `examples/local_extension/`: a local extension example that shows project-owned extensions
 
 ### Profiles
 
@@ -122,16 +123,19 @@ python examples/hello_world/tests/smoke.py
 python examples/user_service/tests/smoke.py
 ```
 
-## Current Status
+## Handoff Flow
 
-- Module initialization works
-- Module retrofit works
-- Module validation works
-- The OpenClaw / Codex skill package is synced
-- GitHub Actions validation is available
+1. Read the module's `INDEX.md`
+2. Read the module's `SPEC.md`
+3. Read only the code files needed for the task
+4. Sync `SPEC.md` and `INDEX.md` when implementation changes
+5. Keep `tests/smoke.py` up to date
+6. Run `tools/validate_module.py <module_path>`
+7. Update `CHANGELOG.md` when behavior changes
 
 ## Version Info
 
 - Current version: `v1.0.1 beta`
 - Spec version: `v1.0`
-- Status: runnable, verifiable, and ready for publication cleanup
+- Status: runnable, verifiable, and aligned with the default homepage
+- Last updated: 2026-04-06

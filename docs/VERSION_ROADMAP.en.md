@@ -5,6 +5,8 @@
 - `v1.0.1 beta`
 - Status: beta freeze, ready for GitHub publication
 - Focus: single-module maintenance, smoke-test validation, and OpenClaw skill packaging
+- Homepage: defaults to the `v1.0.1 beta` README
+- Historical anchor: `v1.0.0`
 
 ## What v1.0 Includes
 
