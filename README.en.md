@@ -1,19 +1,26 @@
-# Harness Tool Minimal
+# Harness Tool Minimal v1.0.1 beta
 
 [![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](docs/VERSION_ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](docs/VERSION_ROADMAP.en.md)
 
-A minimal Harness Engineering toolkit for module maintenance.
-
-It brings module entry points, specs, smoke tests, and change records into one verifiable handoff flow. It fits both staging cleanup and lightweight module onboarding.
+This is the repository homepage and the default beta baseline shown on GitHub.  
+`v1.0.1 beta` is not a thick platform. It is a hardened minimal baseline with clearer contracts, clearer extension entrances, and enough room for project-level customization.
 
 ## What you get
 
 - A minimal loop: initialize, retrofit, validate, record
 - Real validation: `validate_module.py` actually runs `tests/smoke.py`
-- Extensible structure: `profiles/`, `.openclaw_skill/`, and `templates/`
-- A release-friendly layout: Chinese primary docs, English mirrors, and GitHub Actions checks
+- Lightweight extension surfaces: `profiles/`, `templates/`, and `.openclaw_skill/`
+- A handoff-friendly structure: `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
+- Release resources: Chinese homepage, English mirror, display page, and upgrade checklist
+
+## Best fit
+
+- Small projects
+- Small modules
+- Early-stage development
+- Projects that want AI-assisted maintenance with recoverable context
 
 ## Quick Start
 
@@ -22,12 +29,6 @@ python tools/init_module.py my_module
 python tools/apply_harness.py path/to/module --profile python-service
 python tools/validate_module.py path/to/module --strict --profile python-service
 ```
-
-## Who it is for
-
-- People who want a module to be handoff-friendly and verifiable
-- People who need `INDEX.md`, `SPEC.md`, and `CHANGELOG.md` in an existing project
-- People who want the same workflow available in OpenClaw and Codex
 
 ## What is included
 
@@ -43,16 +44,9 @@ python tools/validate_module.py path/to/module --strict --profile python-service
 
 - `examples/hello_world`
 - `examples/user_service`
+- `examples/local_extension`
 
 ## Install the Skill
-
-### Online Download
-
-- [Download the skill ZIP](https://github.com/3yesore/Harness-Tool-minimal/archive/refs/heads/main.zip)
-- Or use `Code` -> `Download ZIP` on the GitHub repository page
-
-After downloading, unzip it and copy the `.openclaw_skill` directory into your local skill directory.
-If your skill manager supports name-based install, you can also publish the package there and install it by name.
 
 ### OpenClaw
 
@@ -72,7 +66,12 @@ Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harn
 
 - [docs/README.en.md](docs/README.en.md)
 - [README.md](README.md)
+- [docs/VERSION_ROADMAP.en.md](docs/VERSION_ROADMAP.en.md)
+
+## Historical Version
+
+- `v1.0.0`: the initial minimal version, kept as the historical anchor
 
 ## Current Status
 
-v1.0.1 beta, focused on baseline hardening and standardized extension entrances. It is still best suited for small projects, small modules, and early-stage development. Feedback is welcome.
+`v1.0.1 beta` is the default homepage version. Later expansion work, if any, should still flow back into the main line without breaking the minimal baseline.
