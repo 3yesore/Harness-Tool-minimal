@@ -26,6 +26,7 @@
 - [DESIGN_REVIEW.md](DESIGN_REVIEW.md)
 - [FAQ.md](FAQ.md)
 - [GITHUB_PUBLISH_GUIDE.md](GITHUB_PUBLISH_GUIDE.md)
+- [RELEASE_PLAYBOOK.md](RELEASE_PLAYBOOK.md)
 - [AI_OPERATIONS.md](AI_OPERATIONS.md)
 - [EXTENSION_POINTS.md](EXTENSION_POINTS.md)
 
@@ -34,3 +35,4 @@
 - 中文主入口在根目录 `README.md`
 - 英文主入口在根目录 `README.en.md`
 - 发布前先看根目录首页，再根据需要进入这里的专题文档
+- 每次发布新版本，优先看 `RELEASE_PLAYBOOK.md`

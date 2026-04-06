@@ -59,6 +59,7 @@ harness_tool/
 - [HARNESS_SPEC.md](HARNESS_SPEC.md)：仓库级 Harness 规范，说明什么是 Harness、哪些文件必须有、验证规则是什么
 - [VERSION_ROADMAP.md](VERSION_ROADMAP.md)：版本规划，说明当前版本和后续方向
 - [GITHUB_RELEASE.md](GITHUB_RELEASE.md)：发布到 GitHub 前的检查步骤
+- [RELEASE_PLAYBOOK.md](RELEASE_PLAYBOOK.md)：每次发布新版本的固定流程和口径对齐手册
 
 ### 工具脚本
 

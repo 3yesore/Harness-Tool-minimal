@@ -26,6 +26,7 @@ This folder collects supporting docs, release materials, and version display pag
 - [DESIGN_REVIEW.md](DESIGN_REVIEW.md)
 - [FAQ.md](FAQ.md)
 - [GITHUB_PUBLISH_GUIDE.md](GITHUB_PUBLISH_GUIDE.md)
+- [RELEASE_PLAYBOOK.en.md](RELEASE_PLAYBOOK.en.md)
 - [AI_OPERATIONS.en.md](AI_OPERATIONS.en.md)
 - [EXTENSION_POINTS.en.md](EXTENSION_POINTS.en.md)
 
@@ -34,3 +35,4 @@ This folder collects supporting docs, release materials, and version display pag
 - The Chinese homepage is `README.md`
 - The English homepage is `README.en.md`
 - Read the root homepage first, then use this hub for topic-specific materials
+- For recurring releases, start with `RELEASE_PLAYBOOK.en.md`

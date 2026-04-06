@@ -59,6 +59,7 @@ harness_tool/
 - [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md): repository-level Harness specification
 - [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md): version plan
 - [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md): GitHub release checklist
+- [RELEASE_PLAYBOOK.en.md](RELEASE_PLAYBOOK.en.md): the fixed workflow and wording-alignment guide for every new release
 
 ### Tools
 
