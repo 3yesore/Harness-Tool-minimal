@@ -1,218 +1,100 @@
-# Harness Tool 1.0.1
+# Harness Tool
 
 [English](README.md) | [中文](README.zh.md)
 
-`Harness Tool 1.0.1` 是一个面向模块开发、维护、交接和 AI 协作的 **contract-first 工程基底**。
+以契约为先的工程基底，核心保持薄，OpenHarness 通过桥接方式接入。
 
-它的目标不是把仓库做成厚平台，而是把模块职责、接口、验证、关键边界和交接信息收拢到少量固定入口中，让人和 AI 都能在同一套约束下工作。
+## 为什么会有这个项目
 
-这一版的重点很明确：
+很多仓库最后会坏在两个方向上：
 
-- 把 `core` 做硬
-- 把 `contract` 讲清
-- 把扩展边界限制在外层
-- 把 OpenHarness 支持做成真实可验证的 bridge
+- 核心太软，结构和校验规则会慢慢漂移
+- 核心太厚，每接一个新系统都把更多运行时逻辑拖进仓库基底
 
-## 当前定位
+Harness Tool 要解决的是这个中间地带：
 
-`Harness Tool` 在这条线上承担的是 **上游基底** 角色。
+- 保持核心小
+- 把合同讲清楚
+- 让扩展能变化，但不重写基底
+- 让外部 runtime 通过桥接接入，而不是被核心吞进去
 
-- `harness_core` 负责协议、验证、阶段和 scaffold 语义
-- `profiles / templates / markers / overrides` 负责项目侧的可控变化
-- OpenHarness 作为外部 runtime 接入，不进入 `core`
+## 它是什么
 
-所以这个仓库的主线是：
+Harness Tool 是：
 
-> 先把项目结构和合同做稳定，再通过 bridge 把外部 agent runtime 接进来。
+- 一个上游工程基底
+- 一套 contract-first 的仓库结构
+- 一套用于校验、初始化和边界控制的工具
+- 面向模块开发、维护、交接和 AI 协作的基础设施
 
-而不是：
+在这个仓库里，`harness_core` 负责 protocol、validation、stages 和 scaffold semantics。
 
-> 把 `Harness Tool` 做成 runtime 宿主平台。
+## 它不是什么
 
-## 为什么存在
+Harness Tool 不是：
 
-很多仓库的问题不是“功能不够多”，而是：
+- 完整的 agent runtime
+- workflow host
+- plugin platform
+- OpenHarness 自身的集成层
+- 吞并项目私有运行时行为的厚框架
 
-- 核心太软，扩展一多就散
-- 核心太厚，后续接入越来越重
-- 文档、验证、结构、交接是分裂的
-- AI 接入时缺少稳定上下文，只能反复猜
+## 架构一览
 
-`Harness Tool 1.0.1` 对这些问题的处理方式是：
-
-- **thin core**
-- **hard contract**
-- **explicit extension boundaries**
-- **project-owned customization**
-- **bridge-side external integration**
-
-## 你会得到什么
-
-### Contract-first 基线
-
-仓库会用固定入口表达模块是什么、怎么验证、哪些边界不能破：
-
-- `INDEX.md`
-- `SPEC.md`
-- `CHANGELOG.md`
-- `validate`
-- `marker`
-
-### 薄而硬的核心
-
-`harness_core` 只保留机制，不托管外部 runtime，不吞项目私有语义。
-
-当前固定的协议骨架：
-
-- `docs/CORE_PROTOCOL.md`
-- `docs/ADAPTER_PROTOCOL.md`
-- `docs/EXTENSION_PROTOCOL.md`
-
-### 受控的扩展空间
-
-扩展可以长，但必须长在边界之外：
-
-- `profiles/`
-- `templates/`
-- `adapters/`
-- `.openclaw_skill/`
-- `examples/local_extension/`
-
-### 可验证的 OpenHarness 兼容路径
-
-这一版已经有一条真实存在的 OpenHarness-compatible bridge，而不是口头兼容。
-
-## 推荐和 OpenHarness 一起使用
-
-如果你的目标是：
-
-- 让仓库具备稳定的工程合同
-- 再接入 agent runtime 做执行、工具调用和工作流编排
-
-那么 **推荐把 `Harness Tool 1.0.1` 和 OpenHarness 搭配使用**。
-
-两者分工是清楚的：
-
-### Harness Tool
-
-负责：
-
-- 工程合同
-- 模块结构
-- 验证入口
-- 边界纪律
-- 交接与维护基线
-
-### OpenHarness
-
-负责：
-
-- agent runtime
-- tools / providers
-- middleware 组合
-- 执行流和外部运行时能力
-
-### 为什么这种组合更合理
-
-`Harness Tool` 更适合做上游，因为它擅长稳定项目语义。  
-OpenHarness 更适合做下游，因为它擅长运行 agent。
-
-因此推荐模型是：
-
-> `Harness Tool` 定义项目结构与合同，OpenHarness 消费这些结构去执行。
-
-## OpenHarness 支持现状
-
-当前版本已经具备：
-
-- OpenHarness bridge 文档
-- SDK binding 文档
-- `harness_validate` process transport
-- repo-internal OpenHarness example
-- repo-external OpenHarness verification
-- runtime-side registration example
-- provider / middleware bridge-side metadata contract
-
-相关入口：
-
-- [OPENHARNESS_BRIDGE.md](docs/OPENHARNESS_BRIDGE.md)
-- [OPENHARNESS_SDK_BINDING.md](docs/OPENHARNESS_SDK_BINDING.md)
-- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md](docs/OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
-- [docs/OPENHARNESS_EXTERNAL_VERIFY.md](docs/OPENHARNESS_EXTERNAL_VERIFY.md)
-- [docs/OPENHARNESS_BRIDGE_INDEX.md](docs/OPENHARNESS_BRIDGE_INDEX.md)
-
-### 这版支持什么
-
-- narrow bridge / binding
-- context injection
-- transport-based validation calls
-- repo-external compatibility verification
-
-### 这版不宣称什么
-
-- 不宣称完整 OpenHarness runtime integration
-- 不宣称 live provider wiring
-- 不宣称 live middleware wiring
-- 不宣称 session / conversation integration
-- 不宣称 `harness_core` 宿主 runtime
-
-这不是能力缺失被隐藏，而是刻意保留边界。
-
-## 仓库结构
-
-### Core
+仓库分成三层：
 
 - `harness_core/`
-- `tools/`
+  负责协议、校验、阶段和 scaffold 语义。
+- 扩展层
+  `profiles/`、`templates/`、`.openclaw_skill/`，以及 `examples/local_extension/` 这样的本地扩展示例。
+- bridge 层
+  `adapters/`、`scripts/openharness_*` 和 OpenHarness 示例。
 
-### Docs
+设计目标很直接：合同放在核心，变化留在外层，外部 runtime 通过窄桥接入。
 
-- `docs/CORE_PROTOCOL.md`
-- `docs/ADAPTER_PROTOCOL.md`
-- `docs/EXTENSION_PROTOCOL.md`
-- `docs/INDEX.md`
-- `docs/HARNESS_SPEC.md`
-- `docs/VERSION_ROADMAP.md`
-- `docs/DESIGN_REVIEW.md`
-- `docs/AI_CHECKLIST.md`
-- `docs/AI_OPERATIONS.md`
+## 和 OpenHarness 的关系
 
-### Extensions
+OpenHarness 是外部 runtime。这个仓库不拥有它，也不会把它的运行时职责塞进 `harness_core`。
 
-- `profiles/`
-- `templates/`
-- `.openclaw_skill/`
-- `examples/local_extension/`
+当前接入方式是 bridge-side 的，包括：
 
-### OpenHarness Bridge
+- bridge 和 binding 文档
+- 基于 transport 的校验调用
+- context injection
+- 面向 OpenHarness 的示例
+- 外部验证材料
 
-- `adapters/`
-- `scripts/openharness_*`
-- `examples/openharness_app/`
-- `docs/OPENHARNESS_*.md`
+当前这个仓库支持：
 
-### Release
+- OpenHarness-compatible bridge 和 binding
+- 通过 process transport 暴露 `harness_validate`
+- 面向 agent / skill 的上下文注入材料
+- 位于 core 之外的 runtime-side registration example
 
-- `docs/GITHUB_RELEASE.md`
-- `docs/RELEASE_NOTES_v1.0.1_beta.md`
-- `release/v1.0.1-beta/`
+当前这个仓库不宣称：
+
+- 完整拥有 OpenHarness runtime
+- 在 core 内做 live provider wiring
+- 在 core 内做 live middleware wiring
+- 完整的 session / conversation integration
+- 在仓库内部提供完整 agent 平台
 
 ## 快速开始
 
-### 初始化新模块
+初始化一个新模块：
 
 ```bash
 python tools/init_module.py my_module
 ```
 
-### 为现有模块补齐 harness
+把 Harness Tool 应用到已有模块：
 
 ```bash
 python tools/apply_harness.py path/to/module
 python tools/apply_harness.py path/to/module --profile python-service
 ```
 
-### 校验模块
+校验模块：
 
 ```bash
 python tools/validate_module.py path/to/module
@@ -220,66 +102,50 @@ python tools/validate_module.py path/to/module --strict
 python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
-### 运行内置示例
-
-```bash
-python examples/hello_world/tests/smoke.py
-python examples/local_extension/harness/run_harness.py
-```
-
-### OpenHarness 兼容示例
+校验 OpenHarness 示例：
 
 ```bash
 python tools/validate_module.py examples/openharness_app --strict --profile default
 ```
 
-外部验证：
+外部验证路径见 [OPENHARNESS_EXTERNAL_VERIFY](docs/OPENHARNESS_EXTERNAL_VERIFY.md)。
 
-```bash
-cd C:/Users/Y2516/Desktop/openharness_app_external_verify
-npm run build
-npm run smoke
-```
+## 仓库结构
 
-## 已验证结果
+- 根入口
+  `README.md`、`README.zh.md`、`README.en.md`。
+- `docs/`
+  仓库文档、协议、发布说明、工作索引和 OpenHarness bridge 材料。
+- `harness_core/`
+  共享协议与校验实现。
+- `tools/`
+  模块初始化、应用、校验和修复入口。
+- `examples/`
+  基线示例、本地扩展示例和 OpenHarness 示例应用。
+- `adapters/`
+  bridge-side 协议和 OpenHarness 集成接口。
+- `release/`
+  打包好的发布材料。
 
-当前仓库已通过：
+## 当前范围和限制
 
-- `python tools/validate_module.py examples/hello_world --strict --profile python-service`
-- `python tools/validate_module.py examples/local_extension --strict --profile default`
-- `python tools/validate_module.py examples/openharness_app --strict --profile default`
-- `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
+当前范围是刻意收窄的：
 
-外部 OpenHarness app 已通过：
+- OpenHarness 支持只停留在 bridge-side
+- `harness_core` 不拥有 runtime 职责
+- provider 和 middleware 目前只是 bridge metadata，不是 live core wiring
+- 完整的 session / conversation integration 不在当前范围内
+- `examples/openharness_app` 在本地依赖缺失时可能跳过 npm smoke
 
-- `npm run build`
-- `npm run smoke`
+这个仓库可以作为工程基底，也可以作为 bridge 来源，但不应该被描述成完整 runtime 产品。
 
-## 版本说明
+## 继续阅读
 
-`Harness Tool 1.0.1` 是一个冻结和收口版本，不是平台化扩张版本。
-
-它现在适合被描述为：
-
-- 一个独立的上游工程基底
-- 一个 contract-first 模块框架
-- 一个带有 OpenHarness-compatible bridge 的真实仓库
-
-但它仍然应该被准确描述为：
-
-> **core 稳定，bridge 可用，runtime 不宿主。**
-
-## 发布入口
-
-- [GITHUB_RELEASE.md](docs/GITHUB_RELEASE.md)
-- [RELEASE_NOTES_v1.0.1_beta.md](docs/RELEASE_NOTES_v1.0.1_beta.md)
-- [release/v1.0.1-beta/README.md](release/v1.0.1-beta/README.md)
-- [release/v1.0.1-beta/VERSION_DESCRIPTION.zh.md](release/v1.0.1-beta/VERSION_DESCRIPTION.zh.md)
-- [release/v1.0.1-beta/PUBLISH_CHECKLIST.zh.md](release/v1.0.1-beta/PUBLISH_CHECKLIST.zh.md)
-
-## 整理与冻结入口
-
-- [docs/CURRENT_CHANGESET_INDEX.md](docs/CURRENT_CHANGESET_INDEX.md)
-- [docs/FREEZE_GROUPS.md](docs/FREEZE_GROUPS.md)
-- [docs/STAGED_COMMIT_PLAN.md](docs/STAGED_COMMIT_PLAN.md)
-- [docs/WORK_INDEX.md](docs/WORK_INDEX.md)
+- [仓库索引](docs/INDEX.md)
+- [Harness 规范](docs/HARNESS_SPEC.md)
+- [Core 协议](docs/CORE_PROTOCOL.md)
+- [Adapter 协议](docs/ADAPTER_PROTOCOL.md)
+- [Extension 协议](docs/EXTENSION_PROTOCOL.md)
+- [OpenHarness Bridge](docs/OPENHARNESS_BRIDGE.md)
+- [OpenHarness SDK Binding](docs/OPENHARNESS_SDK_BINDING.md)
+- [GitHub 发布说明](docs/GITHUB_RELEASE.md)
