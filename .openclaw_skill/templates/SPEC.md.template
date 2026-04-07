@@ -1,5 +1,10 @@
 # 接口规范: {{MODULE_NAME}}
 
+## 调用入口
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`
+
 ## 输入
 
 ### 参数
@@ -39,13 +44,8 @@
 
 ## 配置
 
-### 配置文件: `configs/default.json`
-```json
-{
-  "timeout": 30,
-  "retry": 3
-}
-```
+### 配置文件
+`configs/default.json`
 
 ### 环境变量
 - `MODULE_ENV`: 运行环境（dev/prod）
@@ -54,7 +54,7 @@
 
 - 输入验证失败：返回 `INVALID_INPUT`
 - 运行时异常：记录日志，返回 `RUNTIME_ERROR`
-- 超时：自动重试，超过 `retry` 次数后失败
+- 超时：按模块自身策略处理
 
 ## 示例
 
@@ -70,3 +70,9 @@ print(result)
 ```bash
 python src/main.py --param1 value --param2 123
 ```
+
+## 关键标记
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`
+

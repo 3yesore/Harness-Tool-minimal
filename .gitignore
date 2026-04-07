@@ -48,3 +48,9 @@ htmlcov/
 tmp/
 temp/
 *.tmp
+
+# Node
+node_modules/
+
+# Release artifacts
+release/*.zip

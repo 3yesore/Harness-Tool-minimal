@@ -1,77 +1,286 @@
-# Harness Tool Minimal v1.0.1 beta
+# Harness Tool 1.0.1
 
-[![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](docs/VERSION_ROADMAP.md)
+[English](README.md) | [中文](README.zh.md)
 
-这是仓库的默认主页，也是当前默认展示的 beta 基线版本。  
-`v1.0.1 beta` 不是厚平台，而是一个围绕 minimal 基线做收口和加固的历史版本主页：核心更薄、合同更硬、扩展入口更清楚，同时保留足够大的项目级自定义空间。
+`Harness Tool 1.0.1` is a **contract-first engineering base** for module development, maintenance, handoff, and AI-assisted work.
 
-## 你会得到什么
+Its goal is not to turn the repository into a thick platform. Its goal is to keep module responsibilities, interfaces, validation, critical boundaries, and handoff information inside a small set of fixed entrypoints so both humans and AI can work against the same constraints.
 
-- 一套最小闭环：初始化、接入、验证、记录
-- 一套可执行验证：`validate_module.py` 会实际运行 `tests/smoke.py`
-- 一套轻量扩展面：`profiles/`、`templates/`、`.openclaw_skill/`
-- 一套可交接结构：`INDEX.md`、`SPEC.md`、`CHANGELOG.md`
-- 一套发布资源：中文主页、英文镜像、展示页、升级清单
+This release is about four things:
 
-## 这版适合什么场景
+- making `core` hard
+- making the `contract` explicit
+- keeping extension boundaries outside the core
+- providing a real, verified OpenHarness-compatible bridge
 
-- 小项目
-- 小模块
-- 开发初期
-- 需要 AI 参与维护但又希望上下文可恢复的项目
+## Positioning
 
-## 快速上手
+`Harness Tool` acts as the **upstream base** in this architecture.
+
+- `harness_core` owns protocol, validation, stages, and scaffold semantics
+- `profiles / templates / markers / overrides` own project-side variation
+- OpenHarness enters as an external runtime and stays outside `core`
+
+So the main design is:
+
+> stabilize project structure and contract first, then connect external agent runtime through a bridge
+
+not:
+
+> turn `Harness Tool` into a runtime host
+
+## Why It Exists
+
+Many repositories fail in one of two ways:
+
+- the core is too soft, so extensions drift and maintenance gets noisy
+- the core is too thick, so every new integration makes the system heavier
+
+`Harness Tool 1.0.1` is built around a stricter middle line:
+
+- **thin core**
+- **hard contract**
+- **explicit extension boundaries**
+- **project-owned customization**
+- **bridge-side external integration**
+
+## What You Get
+
+### Contract-first baseline
+
+The repository uses fixed entrypoints to express what a module is, how it is validated, and which boundaries cannot be broken:
+
+- `INDEX.md`
+- `SPEC.md`
+- `CHANGELOG.md`
+- `validate`
+- `marker`
+
+### Thin but hard core
+
+`harness_core` keeps the mechanism layer only. It does not host external runtime behavior and it does not absorb project-private semantics.
+
+The current protocol skeleton is defined by:
+
+- `CORE_PROTOCOL.md`
+- `ADAPTER_PROTOCOL.md`
+- `EXTENSION_PROTOCOL.md`
+
+### Controlled extension space
+
+Extensions are allowed to grow, but only outside the core boundary:
+
+- `profiles/`
+- `templates/`
+- `adapters/`
+- `.openclaw_skill/`
+- `examples/local_extension/`
+
+### Verified OpenHarness compatibility path
+
+This version includes a real OpenHarness-compatible bridge, not just a conceptual claim.
+
+## Recommended Pairing: OpenHarness
+
+If your goal is:
+
+- to keep a stable project contract
+- and then attach an agent runtime for execution, tool use, and workflow composition
+
+then **using `Harness Tool 1.0.1` together with OpenHarness is recommended**.
+
+The split is intentional:
+
+### Harness Tool
+
+Owns:
+
+- engineering contract
+- module structure
+- validation entrypoints
+- boundary discipline
+- handoff and maintenance baseline
+
+### OpenHarness
+
+Owns:
+
+- agent runtime
+- tools / providers
+- middleware composition
+- execution flow
+- external runtime behavior
+
+### Why this pairing is practical
+
+`Harness Tool` is stronger as the upstream engineering base because it stabilizes project meaning.  
+OpenHarness is stronger as the downstream runtime because it executes agents.
+
+So the recommended model is:
+
+> `Harness Tool` defines the project structure and contract, and OpenHarness consumes that structure to act on the project.
+
+## OpenHarness Support In 1.0.1
+
+The current version already includes:
+
+- OpenHarness bridge documentation
+- SDK binding documentation
+- `harness_validate` process transport
+- a repo-internal OpenHarness example
+- a repo-external OpenHarness verification app
+- a runtime-side registration example
+- a provider / middleware bridge-side metadata contract
+
+Relevant entrypoints:
+
+- [OPENHARNESS_BRIDGE.md](OPENHARNESS_BRIDGE.md)
+- [OPENHARNESS_SDK_BINDING.md](OPENHARNESS_SDK_BINDING.md)
+- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md](OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
+- [docs/OPENHARNESS_EXTERNAL_VERIFY.md](docs/OPENHARNESS_EXTERNAL_VERIFY.md)
+- [docs/OPENHARNESS_BRIDGE_INDEX.md](docs/OPENHARNESS_BRIDGE_INDEX.md)
+
+### What this version supports
+
+- narrow bridge / binding
+- context injection
+- transport-based validation calls
+- repo-external compatibility verification
+
+### What this version does not claim
+
+- no full OpenHarness runtime integration
+- no live provider wiring
+- no live middleware wiring
+- no session / conversation integration
+- no `harness_core` runtime ownership
+
+That is a deliberate boundary, not hidden incompleteness.
+
+## Repository Layout
+
+### Core
+
+- `harness_core/`
+- `tools/`
+- `CORE_PROTOCOL.md`
+- `ADAPTER_PROTOCOL.md`
+- `EXTENSION_PROTOCOL.md`
+
+### Docs
+
+- `README.md`
+- `README.zh.md`
+- `INDEX.md`
+- `HARNESS_SPEC.md`
+- `VERSION_ROADMAP.md`
+- `DESIGN_REVIEW.md`
+- `AI_CHECKLIST.md`
+- `AI_OPERATIONS.md`
+
+### Extensions
+
+- `profiles/`
+- `templates/`
+- `.openclaw_skill/`
+- `examples/local_extension/`
+
+### OpenHarness bridge
+
+- `adapters/`
+- `scripts/openharness_*`
+- `examples/openharness_app/`
+- `docs/OPENHARNESS_*.md`
+
+### Release
+
+- `GITHUB_RELEASE.md`
+- `RELEASE_NOTES_v1.0.1_beta.md`
+- `release/v1.0.1-beta/`
+
+## Quick Start
+
+### Initialize a new module
 
 ```bash
 python tools/init_module.py my_module
+```
+
+### Add Harness to an existing module
+
+```bash
+python tools/apply_harness.py path/to/module
 python tools/apply_harness.py path/to/module --profile python-service
+```
+
+### Validate a module
+
+```bash
+python tools/validate_module.py path/to/module
+python tools/validate_module.py path/to/module --strict
 python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
-## 仓库内容
+### Run built-in examples
 
-- `tools/init_module.py`：初始化模块骨架
-- `tools/apply_harness.py`：为现有模块补 Harness
-- `tools/validate_module.py`：校验文档、配置和冒烟测试
-- `templates/`：文档模板
-- `profiles/`：规则预设
-- `examples/`：参考示例
-- `.openclaw_skill/`：OpenClaw / Codex skill 包
-
-## 示例
-
-- `examples/hello_world`
-- `examples/user_service`
-- `examples/local_extension`
-
-## 安装 Skill
-
-### OpenClaw
-
-```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.openclaw\skills" | Out-Null
-Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.openclaw\skills\harness"
+```bash
+python examples/hello_world/tests/smoke.py
+python examples/local_extension/harness/run_harness.py
 ```
 
-### Codex / VS Code
+### OpenHarness-compatible example
 
-```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
-Copy-Item -Recurse -Force ".openclaw_skill" "$env:USERPROFILE\.codex\skills\harness"
+```bash
+python tools/validate_module.py examples/openharness_app --strict --profile default
 ```
 
-## 文档入口
+External verification:
 
-- [docs/README.md](docs/README.md)
-- [README.en.md](README.en.md)
-- [docs/VERSION_ROADMAP.md](docs/VERSION_ROADMAP.md)
+```bash
+cd C:/Users/Y2516/Desktop/openharness_app_external_verify
+npm run build
+npm run smoke
+```
 
-## 历史版本
+## Verified Checks
 
-- `v1.0.0`：初始 minimal 版本，作为历史锚点保留
+The current repository passes:
 
-## 当前状态
+- `python tools/validate_module.py examples/hello_world --strict --profile python-service`
+- `python tools/validate_module.py examples/local_extension --strict --profile default`
+- `python tools/validate_module.py examples/openharness_app --strict --profile default`
+- `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
 
-`v1.0.1 beta`，当前默认展示的主页版本。后续如果继续推进新扩展，会在保持 minimal 基线的前提下逐步回流到主线。
+The external OpenHarness app passes:
+
+- `npm run build`
+- `npm run smoke`
+
+## Release Statement
+
+`Harness Tool 1.0.1` is a freeze-and-tightening release, not a platform-expansion release.
+
+It is accurate to describe it as:
+
+- an independent upstream engineering base
+- a contract-first module framework
+- a repository with a real OpenHarness-compatible bridge
+
+It should still be described carefully:
+
+> **stable as a core, usable as a bridge, intentionally not a runtime host**
+
+## Release Entry
+
+- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)
+- [RELEASE_NOTES_v1.0.1_beta.md](RELEASE_NOTES_v1.0.1_beta.md)
+- [release/v1.0.1-beta/README.md](release/v1.0.1-beta/README.md)
+- [release/v1.0.1-beta/VERSION_DESCRIPTION.en.md](release/v1.0.1-beta/VERSION_DESCRIPTION.en.md)
+- [release/v1.0.1-beta/PUBLISH_CHECKLIST.en.md](release/v1.0.1-beta/PUBLISH_CHECKLIST.en.md)
+
+## Cleanup And Freeze Entry
+
+- [docs/CURRENT_CHANGESET_INDEX.md](docs/CURRENT_CHANGESET_INDEX.md)
+- [docs/FREEZE_GROUPS.md](docs/FREEZE_GROUPS.md)
+- [docs/STAGED_COMMIT_PLAN.md](docs/STAGED_COMMIT_PLAN.md)
+- [docs/WORK_INDEX.md](docs/WORK_INDEX.md)

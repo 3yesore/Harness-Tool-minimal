@@ -1,0 +1,5 @@
+{
+  "target_module": "examples/local_extension",
+  "profile": "default",
+  "strict": true
+}

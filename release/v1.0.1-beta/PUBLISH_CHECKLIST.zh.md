@@ -1,35 +1,36 @@
 # 发布检查清单
 
-## 发布前
+在正式发布 `v1.0.1 beta` 之前，请逐项确认。
 
-- 确认 `README.md` 是中文主页，`README.en.md` 是英文镜像
-- 确认 `VERSION_DESCRIPTION.zh.md` 和 `VERSION_DESCRIPTION.en.md` 口径一致
-- 确认 `GITHUB_RELEASE.zh.md` 的第一条保留你提供的更新摘要
-- 确认版本号统一为 `v1.0.1 beta` / `v1.0.1-beta`
-- 确认不再混用 `v1.0.0`
+## 代码和验证
 
-## 验证命令
+- [ ] `python tools/validate_module.py examples/hello_world --strict --profile python-service` 通过
+- [ ] `python tools/validate_module.py examples/local_extension --strict --profile default` 通过
+- [ ] `python tools/validate_module.py examples/openharness_app --strict --profile default` 通过
+- [ ] `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service` 通过
+- [ ] `npm run build` in `C:/Users/Y2516/Desktop/openharness_app_external_verify` 通过
+- [ ] `npm run smoke` in `C:/Users/Y2516/Desktop/openharness_app_external_verify` 通过
 
-```bash
-python tools/validate_module.py examples/hello_world --strict --profile python-service
-python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service
-python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py
-```
+## 发布材料
 
-## GitHub 发布
+- [ ] `RELEASE_NOTES_v1.0.1_beta.md` 已更新
+- [ ] `release/v1.0.1-beta/VERSION_DESCRIPTION.zh.md` 已更新
+- [ ] `release/v1.0.1-beta/VERSION_DESCRIPTION.en.md` 已更新
+- [ ] `release/v1.0.1-beta/GITHUB_RELEASE.zh.md` 已更新
+- [ ] `release/v1.0.1-beta/GITHUB_RELEASE.en.md` 已更新
+- [ ] 发布口径与当前版本状态一致
 
-```bash
-git status --short
-git add .
-git commit -m "Prepare v1.0.1 beta release"
-git tag v1.0.1-beta
-git push origin main
-git push origin v1.0.1-beta
-```
+## 仓库状态
 
-## 发布后
+- [ ] 已按 freeze groups 完成分组提交
+- [ ] 没有遗漏的临时文件或缓存目录
+- [ ] `examples/openharness_app/node_modules/` 未进入版本控制
+- [ ] `harness_core/` 保持薄核心，没有新增 runtime 托管逻辑
+- [ ] OpenHarness 兼容能力仍停留在 bridge / binding 外层
+- [ ] 默认一致性模式仍然保留 `soft`
 
-- 检查 GitHub Release 标题和正文是否正确
-- 检查 tag 是否指向当前 `main` 提交
-- 检查是否把 `v1.0.0` 和 `v1.0.1 beta` 混在一起
+## 发布后动作
 
+- [ ] 打上版本标签 `v1.0.1-beta`
+- [ ] 保留 `v1.0.0` 作为回滚锚点
+- [ ] 检查 README / SPEC / skill mirror / bridge 文档是否与已发布行为一致

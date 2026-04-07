@@ -1,5 +1,10 @@
 # 接口规范: hello_world
 
+## 调用入口
+- `entry_file`: `src/main.py`
+- `call_path`: `src/main.py`
+- `call_entry`: `src/main.py`
+
 ## 输入
 
 ### 参数
@@ -10,7 +15,7 @@
 ```
 
 ### 约束
-- `name`: 可选，默认 "World"
+- `name`: 可选，默认 `"World"`
 
 ## 输出
 
@@ -27,9 +32,12 @@
 {
   "status": "error",
   "code": "INVALID_INPUT",
-  "message": "错误描述"
+  "message": "错误信息"
 }
 ```
+
+### 错误码
+- `INVALID_INPUT`: 输入参数不合法
 
 ## 配置
 
@@ -42,7 +50,7 @@
 
 ## 错误处理
 
-- 输入验证失败：返回 `INVALID_INPUT`
+- 输入验证失败时返回 `INVALID_INPUT`
 
 ## 示例
 
@@ -51,10 +59,15 @@
 from examples.hello_world.src.main import greet
 
 result = greet(name="Alice")
-print(result)  # {"status": "success", "message": "Hello, Alice!"}
+print(result)
 ```
 
 ### CLI
 ```bash
 python examples/hello_world/src/main.py --name Alice
 ```
+
+## 关键标记
+- `entry_file`: `src/main.py`
+- `call_path`: `src/main.py`
+- `call_entry`: `src/main.py`

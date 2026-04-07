@@ -1,47 +1,61 @@
-# Harness Tool Minimal v1.0.1 beta
+# Harness Tool 1.0.1 发布包
 
-[![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](../VERSION_ROADMAP.md)
+[English](README.en.md) | [中文](README.md)
 
-这是一个围绕 minimal 基线做收口和加固的 beta 发布包。  
-它保留了最小但完整的 Harness 工作流，同时把标准化入口、验证流程和扩展边界继续做清楚，适合小项目、小模块和开发初期使用。
+这是 `Harness Tool 1.0.1` 的发布准备包主页。
 
-## 这次更新重点
+## 这个包的作用
 
-- 保持 `init / apply / validate` 的最小闭环
-- 保持 `INDEX.md`、`SPEC.md`、`CHANGELOG.md`、`tests/smoke.py` 的可交接结构
-- 保持 `profiles/`、`templates/` 和 `.openclaw_skill/` 作为轻量扩展面
-- 继续用 GitHub Actions 做基础校验
-- 保持中文主入口 + 英文镜像的发布形式
+- 汇总当前版本对外发布需要带走的文案
+- 作为发布前检查的统一入口
+- 作为发布后回看的版本资料入口
 
-## 你会得到什么
+## 当前发布结论
 
-- 一套最小闭环：初始化、接入、验证、记录
-- 一套可执行验证：`validate_module.py` 会实际运行 `tests/smoke.py`
-- 一套轻量扩展：`profiles/`、`templates/`、`.openclaw_skill/`
-- 一套发布准备：中文主页、英文镜像、发布说明和检查清单
+当前版本已经适合作为你自己的项目基线发布。
 
-## 适合谁
+对外应统一表述为：
 
-- 想把一个模块整理成“可交接、可验证”结构的人
-- 想给现有项目补上 `INDEX.md`、`SPEC.md`、`CHANGELOG.md` 的人
-- 想把同一套流程同时交给 OpenClaw 和 Codex 使用的人
-- 想在开发初期就把模块纳入 Harness 工作流的人
+- `harness_tool` 是上游、contract-first 基底
+- `harness_core` 保持薄，不宿主 runtime
+- OpenHarness 兼容能力停留在 bridge / binding 外层
+- 外部验证已完成，但它代表兼容性证据，不代表 runtime ownership
 
-## 包含内容
-
-- `README.md` / `README.en.md`
-- `VERSION_DESCRIPTION.zh.md` / `VERSION_DESCRIPTION.en.md`
-- `GITHUB_RELEASE.zh.md` / `GITHUB_RELEASE.en.md`
-- `DISPLAY_PAGE.zh.md` / `DISPLAY_PAGE.en.md`
-- `MANIFEST.md`
-- `PUBLISH_CHECKLIST.zh.md` / `PUBLISH_CHECKLIST.en.md`
-- `UPGRADE_CHECKLIST.zh.md` / `UPGRADE_CHECKLIST.en.md`
-
-## 版本说明
-
-更完整的版本描述请看：
+## 包内主要文件
 
 - [VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)
 - [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md)
+- [GITHUB_RELEASE.zh.md](GITHUB_RELEASE.zh.md)
+- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md)
+- [PUBLISH_CHECKLIST.zh.md](PUBLISH_CHECKLIST.zh.md)
+- [PUBLISH_CHECKLIST.en.md](PUBLISH_CHECKLIST.en.md)
+- [MANIFEST.md](MANIFEST.md)
+
+## 当前版本边界
+
+这个发布包明确支持：
+
+- 薄核心、强合同的仓库叙事
+- 模板、规则、示例和 skill mirror 的冻结基线
+- OpenHarness-compatible bridge 与 repo-external 验证
+
+这个发布包不声称：
+
+- 已完整接入 OpenHarness runtime
+- 已完成 provider / middleware live wiring
+- 已完成 session / conversation integration
+
+## 建议发布策略
+
+- 先完成仓库内的 freeze groups 提交
+- 再以 `Harness Tool 1.0.1` 对外发布
+- 发布后如果要给 OpenHarness 上游贡献，优先贡献：
+  - docs
+  - example
+  - compatibility note
+
+## 发布状态建议
+
+- 当前状态：可发布的稳定基线
+- 发布策略：冻结基线，不继续厚化 core
+- 后续策略：只接受 bug 修复、文档修正、兼容性补丁和经过验证的边界收紧

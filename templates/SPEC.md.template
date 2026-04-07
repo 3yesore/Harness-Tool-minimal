@@ -1,5 +1,10 @@
 # 接口规范: {{MODULE_NAME}}
 
+## 调用入口
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`
+
 ## 输入
 
 ### 参数
@@ -11,7 +16,7 @@
 ```
 
 ### 约束
-- `param1`: 必需，非空字符串
+- `param1`: 必填，非空字符串
 - `param2`: 可选，默认 0
 
 ## 输出
@@ -29,7 +34,7 @@
 {
   "status": "error",
   "code": "ERROR_CODE",
-  "message": "错误描述"
+  "message": "错误信息"
 }
 ```
 
@@ -48,13 +53,13 @@
 ```
 
 ### 环境变量
-- `MODULE_ENV`: 运行环境（dev/prod）
+- `MODULE_ENV`: 运行环境，`dev` / `prod`
 
 ## 错误处理
 
-- 输入验证失败：返回 `INVALID_INPUT`
-- 运行时异常：记录日志，返回 `RUNTIME_ERROR`
-- 超时：自动重试，超过 `retry` 次数后失败
+- 输入验证失败时返回 `INVALID_INPUT`
+- 运行时异常记录日志并返回 `RUNTIME_ERROR`
+- 如支持重试，使用 `retry` 参数控制
 
 ## 示例
 
@@ -70,3 +75,8 @@ print(result)
 ```bash
 python src/main.py --param1 value --param2 123
 ```
+
+## 关键标记
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`

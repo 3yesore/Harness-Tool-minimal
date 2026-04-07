@@ -1,37 +1,54 @@
-# Harness Tool Minimal v1.0.1 Historical Baseline
+# Harness Tool Minimal v1.0.1 beta
 
-`v1.0.1 beta` is the frozen minimal baseline for this project.  
-It is no longer positioned as a platform-expansion experiment. Instead, it serves as a historical baseline display page that can be used as a stable reference.
+`v1.0.1 beta` is the frozen baseline release of `Harness Tool Minimal`.
 
-For the full version description, risk boundaries, and release resources, see [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md).  
-If you want the short historical view, see [DISPLAY_PAGE.en.md](DISPLAY_PAGE.en.md).
+This release is not about turning the repository into a thicker platform. It is about freezing the structure that is already in place into one coherent story:
 
-## What this release shows
+- `harness_tool` remains the upstream, contract-first base
+- `harness_core` remains thin and owns only protocol, validation, stages, and scaffold semantics
+- OpenHarness compatibility remains in the bridge / binding layer
+- external verification remains compatibility evidence, not runtime ownership
 
-- Minimal loop: `init / apply / validate`
-- Standardized module entry points: `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
-- Lightweight extension surfaces: `profiles/`, `templates/`, and `.openclaw_skill/`
-- Default consistency mode: `soft`
-- Extension style: example-first, project-local implementation
+## Highlights
 
-## Why it is worth keeping
+- frozen core / contract baseline
+- explicit `core / adapter / extension` boundaries
+- aligned templates, rules, and examples
+- synced OpenClaw skill mirror
+- OpenHarness-compatible bridge and SDK binding
+- repo-external OpenHarness app verification
 
-- It consolidates module development, validation, handoff, and records into a small set of fixed files.
-- It preserves room for project-level customization without making the core thick.
-- It is suitable for small projects, small modules, and early-stage development.
-- It serves as the historical baseline for later experiments and future expansion.
+## What This Release Means
 
-## Validation commands
+This version is suitable as the baseline release of your own project. It already includes:
 
-```bash
-python tools/validate_module.py examples/hello_world --strict --profile python-service
-python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service
-python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py
-python examples/local_extension/harness/run_harness.py
-```
+- an upstream contract-first narrative
+- unified core protocol entry points
+- stable extension and template boundaries
+- a verified OpenHarness-compatible bridge
 
-## Release notes
+It should not be presented as:
 
-- Rollback anchor: `v1.0.0`
-- Page role: historical baseline display page
-- Recommended use: reference baseline for later experiments and extension backflow
+- a full OpenHarness runtime integration
+- provider / middleware lifecycle integration
+- a session / conversation host runtime
+
+## Verified Commands
+
+- `python tools/validate_module.py examples/hello_world --strict --profile python-service`
+- `python tools/validate_module.py examples/local_extension --strict --profile default`
+- `python tools/validate_module.py examples/openharness_app --strict --profile default`
+- `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
+- `npm run build` in `C:/Users/Y2516/Desktop/openharness_app_external_verify`
+- `npm run smoke` in `C:/Users/Y2516/Desktop/openharness_app_external_verify`
+
+## Notes
+
+- This is a freeze-and-tightening release, not a platform-expansion release
+- OpenHarness compatibility is still a narrow bridge
+- `v1.0.0` remains the rollback anchor
+
+For the full version description, see:
+
+- [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md)
+- [PUBLISH_CHECKLIST.en.md](PUBLISH_CHECKLIST.en.md)

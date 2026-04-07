@@ -8,9 +8,20 @@
 - `configs/default.json`: 默认配置
 - `tests/smoke.py`: 冒烟测试
 
+## 调用入口
+- `module_path`: `{{MODULE_NAME}}`
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`
+
+## 关键标记
+- `entry_file`: `{{ENTRY_FILE}}`
+- `call_path`: `{{CALL_PATH}}`
+- `call_entry`: `{{CALL_ENTRY}}`
+
 ## 依赖
 - 外部依赖: [列出 pip/npm 包]
-- 内部依赖: [列出其他模块]
+- 内部依赖: [列出相关模块]
 
 ## 快速验证
 ```bash
@@ -18,8 +29,8 @@ python tests/smoke.py
 ```
 
 ## 维护注意事项
-[列出关键约束、已知问题、特殊配置等]
+[列出关键约束、已知问题、部署要点]
 
-## 最后更新
+## 变更记录
 - 日期: {{DATE}}
-- 变更: 初始化模块
+- 说明: 初始化模块

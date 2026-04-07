@@ -1,67 +1,116 @@
 # v1.0.1 beta 版本说明
 
-## 版本定位
-
-`Harness Tool Minimal v1.0.1 beta` 是一次围绕 minimal 基线做的冻结发布。  
-它的重点不是把工具做厚，而是把最小闭环、合同边界、验证口径和扩展入口进一步收紧并固化，使仓库可以作为长期可维护的开发框架底座继续使用。
-
 ## 版本名称
 
 - `Harness Tool Minimal v1.0.1 beta`
 
 ## 一句话说明
 
-- 这是一次基线加固型 beta 发布：核心更薄、合同更硬、扩展入口更清楚，同时保留足够大的项目级自定义空间。
+- 这是一次面向发布的冻结版本：核心继续保持薄、合同继续保持硬，并在不污染 `core` 的前提下补齐了 OpenHarness-compatible bridge 与外部验证链。
+
+## 版本定位
+
+- `harness_tool` 仍然是上游、contract-first 基底
+- `harness_core` 仍然只负责协议、验证、阶段和 scaffold 语义
+- OpenHarness 相关能力仍然停留在 bridge / binding 外层
+- 外部验证是兼容性证据，不是 runtime ownership
 
 ## 核心变化
 
-- `init / apply / validate` 继续统一到同一套核心模型，避免入口脚本各自维护不同逻辑。
-- `harness_core/` 已成为共享底座，承担 `ContractRules`、`ModuleContext`、`ValidationResult`、`ScaffoldPlan` 等核心类型和编排逻辑。
-- `INDEX.md`、`SPEC.md`、`validate` 的 marker 语义已经对齐，关键路径、入口和耦合点可以被快速识别。
-- 默认一致性模式保持 `soft`，把收口限定在原则层面，不把不同项目的入口结构锁死。
-- `profiles/`、`templates/` 与 `.openclaw_skill/` 仍然只承担轻量预设、默认骨架和分发镜像职责，不向 core 里收拢成厚重平台。
-- 本地扩展示例已经补齐，说明项目可以自己在本地挂接扩展，而不是依赖 core 内置的扩展运行时。
+### 1. Core / contract 基线冻结
+
+- 顶层入口文档已经统一到同一套协议叙事：
+  - `README.md`
+  - `INDEX.md`
+  - `HARNESS_SPEC.md`
+- `CORE_PROTOCOL.md`、`ADAPTER_PROTOCOL.md`、`EXTENSION_PROTOCOL.md` 已明确三层边界
+- `harness_core/` 已作为统一合同层存在，不再依赖分散脚本语义
+- `init / apply / validate` 继续通过同一套核心模型协作
+
+### 2. 模板、规则与示例对齐
+
+- `templates/` 已与当前合同标题和字段一致
+- `profiles/` 仍然保持轻量，只描述默认规则预设
+- `examples/hello_world/` 继续作为最小合同示例
+- `examples/local_extension/` 保留项目本地扩展示例
+
+### 3. OpenClaw skill mirror 对齐
+
+- `.openclaw_skill/` 继续作为 mirror，而不是独立产品面
+- mirror 的模板、规则、脚本与当前主合同已经对齐一层
+
+### 4. OpenHarness-compatible bridge 补齐
+
+- 增加了窄桥式的 OpenHarness bridge / binding 能力：
+  - `OPENHARNESS_BRIDGE.md`
+  - `OPENHARNESS_SDK_BINDING.md`
+  - `OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md`
+- `adapters/` 和 `scripts/openharness_*` 只负责桥接，不进入 `harness_core`
+- `provider_hints` / `middleware_hints` 仍然只是 bridge metadata，不是 core semantics
+
+### 5. 外部验证完成
+
+- 仓库内已有 `examples/openharness_app/` 作为最小 OpenHarness app 示例
+- 仓库外已有真实验证目录：
+  - `C:/Users/Y2516/Desktop/openharness_app_external_verify`
+- 已验证：
+  - `Agent` 实例化
+  - `Agent.run(...)` mock dry-run
+  - `harness_validate` process transport
 
 ## 对外承诺
 
-- 适合小项目、小模块、开发初期场景。
-- 适合从一开始就按 Harness 方式组织模块、规范和验证。
-- 适合需要 AI 参与维护、但又希望上下文可恢复、可交接的工程流程。
-- 不承诺把所有大型项目场景一次性覆盖完；更大的结构和更多自动化能力会基于实际测试和反馈逐步评估。
+- 这个版本可以作为你自己的 `harness_tool` 基线发布
+- 它提供的是：
+  - 薄核心
+  - 强合同
+  - 明确扩展边界
+  - 可验证的 OpenHarness-compatible bridge
+- 它不提供的是：
+  - core-owned runtime
+  - provider lifecycle 托管
+  - middleware lifecycle 托管
+  - session / conversation 深集成
 
-## 验证结果
+## 当前验证结果
 
-以下命令在仓库中通过验证：
+以下检查已在当前仓库和外部验证目录跑通：
 
 - `python tools/validate_module.py examples/hello_world --strict --profile python-service`
+- `python tools/validate_module.py examples/local_extension --strict --profile default`
+- `python tools/validate_module.py examples/openharness_app --strict --profile default`
 - `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
-- `python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py`
-- `python examples/local_extension/harness/run_harness.py`
+- `npm run build` in `C:/Users/Y2516/Desktop/openharness_app_external_verify`
+- `npm run smoke` in `C:/Users/Y2516/Desktop/openharness_app_external_verify`
 
 ## 风险说明
 
-- 当前版本的扩展挂载是“示例优先、项目本地实现”的路线，不是统一运行时平台。
-- 默认 marker / 入口一致性采用 `soft` 模式，灵活性保留了，但项目侧仍需要维护本地约定。
-- 为保持 minimal，core 不会继续往平台化方向堆 mode 和旋钮，因此更细的控制应通过项目本地扩展实现。
-- 如果项目已经是较大规模、多入口、多团队协作的工程，建议把这版作为基础层，而不是把它当作完整的平台替代品。
+- 当前 OpenHarness 集成仍然是窄桥，不是完整 runtime 集成
+- 仍未纳入：
+  - live provider wiring
+  - live middleware wiring
+  - non-process transport
+  - session / conversation validation
+  - real model invocation
+- 这不是问题隐藏，而是刻意保留在 bridge open items 中，避免污染 `core`
+
+## 适用范围
+
+- 适合发布为你自己的仓库基线版本
+- 适合小项目、小模块、以及需要先做硬合同的工程起点
+- 适合继续作为上游基底扩展更多 bridge / compatibility 路径
+- 不适合被表述成“已完整接入 OpenHarness runtime”
 
 ## 回滚锚点
 
 - `v1.0.0`
 
-## 准确性确认
-
-下面这些事实已经在仓库里验证过，可以安全写进版本说明：
-
-- 核心已经收口到 `harness_core/`，`init / apply / validate` 共享同一套核心模型。
-- `INDEX.md`、`SPEC.md`、`validate` 的 marker 口径已经对齐。
-- 默认一致性模式仍然是 `soft`，不会把项目自定义空间锁死。
-- 本地扩展示例已经补齐，并且 `run_harness.py` 可以直接运行。
-- 扩展挂载保持为示例优先和项目本地实现，不由 core 托管完整运行时。
-- `v1.0.1 beta` 是独立的冻结基线，不与上一版本口径混用。
-
 ## 建议发布口径
 
-- 本次更新是一次面向 minimal 基线的加固型 beta 发布，重点放在稳定性、交接性与标准化入口。
-- 当前仍然更适合小项目、小模块、开发初期使用。
-- 具体更新内容请结合 release 正文和版本说明查看；后续会根据实际测试和社区反馈，再决定是否向更大结构和更多扩展能力演进。
+- `Harness Tool Minimal v1.0.1 beta` 是一个以冻结和收口为主的版本，不追求平台化扩张
+- 当前版本已经具备：
+  - 上游 contract-first 基底
+  - 稳定的 core/extension 边界
+  - OpenHarness-compatible bridge
+  - 外部验证证据
+- 后续贡献到 OpenHarness 上游时，更适合拆成 docs / example / compatibility note，而不是直接推整套接口层

@@ -1,47 +1,63 @@
-# Harness Tool Minimal v1.0.1 beta
+# Harness Tool 1.0.1 Release Package
 
-[![Validate](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml/badge.svg)](https://github.com/3yesore/Harness-Tool-minimal/actions/workflows/validate.yml)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.0.1-beta-blue.svg)](../VERSION_ROADMAP.en.md)
+[English](README.en.md) | [中文](README.md)
 
-This is a beta release package focused on tightening and hardening the minimal baseline.  
-It keeps the smallest complete Harness workflow while clarifying the standard entry points, validation flow, and extension boundaries. It is best suited for small projects, small modules, and early-stage development.
+This is the release preparation package for `Harness Tool 1.0.1`.
 
-## Focus of this release
+## Purpose
 
-- Keep the minimal `init / apply / validate` loop
-- Keep the handoff-friendly structure around `INDEX.md`, `SPEC.md`, `CHANGELOG.md`, and `tests/smoke.py`
-- Keep `profiles/`, `templates/`, and `.openclaw_skill/` as lightweight extension surfaces
-- Continue using GitHub Actions for baseline validation
-- Keep the Chinese primary docs plus English mirrors release format
+- collect the version-facing materials for the current freeze baseline
+- provide one entry point for pre-release checks
+- provide a version reference package for post-release review
 
-## What you get
+## Current Release Judgment
 
-- A minimal loop: initialize, retrofit, validate, record
-- Real validation: `validate_module.py` actually runs `tests/smoke.py`
-- Lightweight extension surfaces: `profiles/`, `templates/`, and `.openclaw_skill/`
-- A release-ready package: Chinese homepage, English mirror, release notes, and checklist
+- this version is suitable as the baseline release of your own project
+- the core direction remains:
+  - `harness_tool` is the upstream, contract-first base
+  - `harness_core` remains thin and does not host runtime behavior
+  - OpenHarness compatibility stays in the bridge / binding layer
+- the current repository already has:
+  - a frozen core / contract baseline
+  - a synced skill mirror
+  - an OpenHarness-compatible bridge
+  - repo-external verification evidence
 
-## Who this is for
-
-- People who want a module to be handoff-friendly and verifiable
-- People who need `INDEX.md`, `SPEC.md`, and `CHANGELOG.md` in an existing project
-- People who want the same workflow available in OpenClaw and Codex
-- People who want to put a module under the Harness workflow early in development
-
-## Included files
-
-- `README.md` / `README.en.md`
-- `VERSION_DESCRIPTION.zh.md` / `VERSION_DESCRIPTION.en.md`
-- `GITHUB_RELEASE.zh.md` / `GITHUB_RELEASE.en.md`
-- `DISPLAY_PAGE.zh.md` / `DISPLAY_PAGE.en.md`
-- `MANIFEST.md`
-- `PUBLISH_CHECKLIST.zh.md` / `PUBLISH_CHECKLIST.en.md`
-- `UPGRADE_CHECKLIST.zh.md` / `UPGRADE_CHECKLIST.en.md`
-
-## Version description
-
-See the full version description here:
+## Main Files In This Package
 
 - [VERSION_DESCRIPTION.zh.md](VERSION_DESCRIPTION.zh.md)
 - [VERSION_DESCRIPTION.en.md](VERSION_DESCRIPTION.en.md)
+- [GITHUB_RELEASE.zh.md](GITHUB_RELEASE.zh.md)
+- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md)
+- [PUBLISH_CHECKLIST.zh.md](PUBLISH_CHECKLIST.zh.md)
+- [PUBLISH_CHECKLIST.en.md](PUBLISH_CHECKLIST.en.md)
+- [MANIFEST.md](MANIFEST.md)
+
+## Version Boundary
+
+This release package explicitly supports:
+
+- a thin-core, hard-contract repository narrative
+- a frozen baseline for templates, rules, examples, and the skill mirror
+- an OpenHarness-compatible bridge with repo-external verification
+
+This release package does not claim:
+
+- a full OpenHarness runtime integration
+- live provider / middleware wiring
+- session / conversation integration
+
+## Suggested Release Strategy
+
+- finish commit grouping first using the repository freeze groups
+- then publish `Harness Tool 1.0.1`
+- if anything is contributed upstream to OpenHarness afterward, prefer:
+  - docs
+  - examples
+  - compatibility notes
+
+## Suggested Release State
+
+- current state: publishable freeze baseline
+- release policy: freeze the baseline and avoid thickening the core
+- follow-up policy: accept bug fixes, documentation corrections, compatibility patches, and verified boundary tightening only

@@ -1,0 +1,1 @@
+"""Local extension wrapper package."""
