@@ -28,10 +28,10 @@ Start here if you want to understand the current integration shape.
 
 ## Read next
 
-- [Bridge](../../OPENHARNESS_BRIDGE.md)
-- [SDK binding](../../OPENHARNESS_SDK_BINDING.md)
-- [Provider / middleware contract](../../OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
-- [External verification](../../OPENHARNESS_EXTERNAL_VERIFY.md)
-- [Bridge open items](../../OPENHARNESS_BRIDGE_OPEN_ITEMS.md)
-- [SDK binding open items](../../OPENHARNESS_SDK_BINDING_OPEN_ITEMS.md)
-- [Provider / middleware open items](../../OPENHARNESS_PROVIDER_MIDDLEWARE_OPEN_ITEMS.md)
+- [Bridge](BRIDGE.md)
+- [SDK binding](SDK_BINDING.md)
+- [Provider / middleware contract](PROVIDER_MIDDLEWARE_CONTRACT.md)
+- [External verification](EXTERNAL_VERIFY.md)
+- [Bridge open items](BRIDGE_OPEN_ITEMS.md)
+- [SDK binding open items](SDK_BINDING_OPEN_ITEMS.md)
+- [Provider / middleware open items](PROVIDER_MIDDLEWARE_OPEN_ITEMS.md)

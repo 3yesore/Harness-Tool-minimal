@@ -1,19 +1,4 @@
-# 跑偏记录
+# Moved
 
-## 时间
-2026-04-07
-
-## 本次偏离
-- 讨论主线本应聚焦在 `OpenHarness` 的设计精华如何强化 `harness_tool` 的基底，以及如何冻结协议与边界。
-- 中途把工作重心偏到了 `skill` 镜像文件、profile 同步、缓存清理这类收口工作上。
-- 这些工作本身不是错误，但不属于当前主任务的核心。
-
-## 影响
-- 主线推进被打断。
-- 容易让“基底强化 + 冻结协议”这一任务被支线工作稀释。
-
-## 修复原则
-- 先回到主线：只讨论并落实 `OpenHarness -> harness_tool` 的精华映射。
-- 再冻结协议：核心原语、工作流阶段、扩展接口、结果格式。
-- 支线收口工作只在主线完成后再做。
+This document moved to [docs/operations/DEVIATION_LOG.md](operations/DEVIATION_LOG.md).
 

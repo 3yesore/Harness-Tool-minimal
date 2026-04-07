@@ -4,8 +4,8 @@ Use this section for bounded extension surfaces and local customization.
 
 Primary documents:
 
-- [Extension points](../EXTENSION_POINTS.md)
-- [AI checklist](../AI_CHECKLIST.md)
+- [Extension points](EXTENSION_POINTS.md)
+- [AI checklist](AI_CHECKLIST.md)
 
 Relevant repository surfaces:
 
