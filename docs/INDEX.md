@@ -1,50 +1,43 @@
-# Harness Tool 主索引
+# Harness Tool 总索引
 
 ## 仓库概览
 
-Harness Tool Minimal 当前默认展示 `v1.0.1 beta`。它是一套面向模块开发与维护的 Harness Engineering 工具仓库，目标不是做成复杂框架，而是把模块职责、接口、验证和交接信息收拢到少量固定文件里，方便人和 AI 接手。
+`Harness Tool Minimal` 是一个面向模块开发与维护全生命周期的 `harness kernel` 仓库。它不是厚框架，也不是包管理器，而是把模块职责、接口、验证和交接信息收拢到少量固定文件里，让人和 AI 在开发、接入、演进和维护阶段保持一致。
 
-当前仓库已经形成可运行的最小闭环，核心能力包括：
+当前仓库冻结为 `v1.0.1 beta` 基线，核心原则是：
 
-- 新建模块骨架
-- 为现有模块补 Harness 结构
-- 校验模块文档、配置和冒烟测试
-- 使用 `profiles/` 做轻量规则预设
-- 通过 `.openclaw_skill/` 提供 OpenClaw / Codex Skill 版本
-- 通过 GitHub Actions 做基础自动校验
+- `core` 只保留机制和合同
+- `adapter` 负责外部接入翻译
+- `extension` 提供默认预设和模板
+- `override` 只允许项目本地覆盖，不能破坏合同
+
+## 协议地图
+
+- [CORE_PROTOCOL.md](CORE_PROTOCOL.md)：冻结 `core` 骨架和工作流阶段
+- [ADAPTER_PROTOCOL.md](ADAPTER_PROTOCOL.md)：外部接入翻译层的最小协议
+- [EXTENSION_PROTOCOL.md](EXTENSION_PROTOCOL.md)：项目本地扩展的边界
+- [../adapters/README.md](../adapters/README.md)：适配器层工作区入口
+- [OPEN_ITEMS.md](OPEN_ITEMS.md)：保留未收口事项
+- [WORK_INDEX.md](WORK_INDEX.md)：整理顺序索引
+- [CURRENT_CHANGESET_INDEX.md](CURRENT_CHANGESET_INDEX.md)：当前变更面的最终收尾索引
 
 ## 仓库结构
 
 ```text
-harness_tool/
+harness_tool_test/
 ├── README.md
-├── README.en.md
+├── CORE_PROTOCOL.md
+├── ADAPTER_PROTOCOL.md
+├── EXTENSION_PROTOCOL.md
 ├── HARNESS_SPEC.md
-├── HARNESS_SPEC.en.md
 ├── INDEX.md
-├── INDEX.en.md
 ├── VERSION_ROADMAP.md
-├── VERSION_ROADMAP.en.md
 ├── GITHUB_RELEASE.md
-├── GITHUB_RELEASE.en.md
+├── RELEASE_NOTES_v1.0.1_beta.md
+├── DESIGN_REVIEW.md
+├── AI_CHECKLIST.md
 ├── LICENSE
-├── docs/
-│  ├── README.md
-│  ├── README.en.md
-│  ├── AI_CHECKLIST.md
-│  ├── AI_REPAIR_GUIDE.md
-│  ├── CONTRIBUTING.md
-│  ├── DESIGN_REVIEW.md
-│  ├── FAQ.md
-│  ├── GITHUB_PUBLISH_GUIDE.md
-│  ├── RELEASE_NOTES_v1.0.md
-│  ├── AI_OPERATIONS.md
-│  ├── AI_OPERATIONS.en.md
-│  ├── EXTENSION_POINTS.md
-│  ├── EXTENSION_POINTS.en.md
-│  └── ...
-├── .github/
-│  └── workflows/validate.yml
+├── adapters/
 ├── templates/
 ├── tools/
 ├── examples/
@@ -52,100 +45,122 @@ harness_tool/
 └── .openclaw_skill/
 ```
 
-## 核心文件说明
+## 三层结构
 
-### 规范与路线
+### 1. Core
+只负责机制、合同、验证和生成计划。
 
-- [HARNESS_SPEC.md](HARNESS_SPEC.md)：仓库级 Harness 规范，说明什么是 Harness、哪些文件必须有、验证规则是什么
-- [VERSION_ROADMAP.md](VERSION_ROADMAP.md)：版本规划，说明当前版本和后续方向
-- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)：发布到 GitHub 前的检查步骤
-- [RELEASE_PLAYBOOK.md](RELEASE_PLAYBOOK.md)：每次发布新版本的固定流程和口径对齐手册
+### 2. Adapter
+只负责把 OS / 多 agent / 外部项目翻译成标准输入。
 
-### 工具脚本
+### 3. Extension
+只负责项目本地差异，保留 `profiles / templates / marker / override`。
 
-- [tools/init_module.py](tools/init_module.py)：初始化新模块骨架
-- [tools/apply_harness.py](tools/apply_harness.py)：为现有模块补 Harness
-- [tools/validate_module.py](tools/validate_module.py)：校验模块结构、配置文件和冒烟测试
+## 核心文件
 
-### 模板文件
+### 规范与版本
+- [HARNESS_SPEC.md](HARNESS_SPEC.md)：仓库级合同与边界说明
+- [VERSION_ROADMAP.md](VERSION_ROADMAP.md)：版本路线与冻结基线说明
+- [DESIGN_REVIEW.md](DESIGN_REVIEW.md)：minimal 白名单、黑名单和性能底线
+- [AI_CHECKLIST.md](AI_CHECKLIST.md)：AI 接手时的执行清单
+- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)：发布前检查与打标签说明
+- [RELEASE_NOTES_v1.0.1_beta.md](RELEASE_NOTES_v1.0.1_beta.md)：当前 beta 冻结说明
 
-- `templates/INDEX.md.template`
-- `templates/SPEC.md.template`
-- `templates/CHANGELOG.md.template`
+### 协议文件
+- [CORE_PROTOCOL.md](CORE_PROTOCOL.md)：core 协议骨架
+- [ADAPTER_PROTOCOL.md](ADAPTER_PROTOCOL.md)：adapter 协议骨架
+- [EXTENSION_PROTOCOL.md](EXTENSION_PROTOCOL.md)：extension 协议骨架
 
-### 示例模块
+### 工具
+- [../tools/init_module.py](../tools/init_module.py)：生成新模块骨架
+- [../tools/apply_harness.py](../tools/apply_harness.py)：给现有模块补齐 harness 结构
+- [../tools/validate_module.py](../tools/validate_module.py)：校验文档、配置和 smoke test
 
-- `examples/hello_world/`：最小参考示例，验证链路最清晰
-- `examples/user_service/`：稍复杂的参考示例，包含多文件和配置
-- `examples/local_extension/`：本地扩展示例，演示项目自己挂扩展
+## 扩展面
 
-### 配置预设
+- `templates/`：默认骨架模板，只提供安全起点
+- `profiles/`：轻量规则预设，只描述类型差异
+- `adapters/`：适配器层工作区，承接外部接入协议
+- `.openclaw_skill/`：OpenClaw skill 镜像版本
+- `examples/local_extension/`：项目本地扩展示例
 
-- `profiles/default.rules.json`
-- `profiles/python-service.rules.json`
-- `profiles/README.md`
+## 版本信息
 
-### 自动化与 Skill
+- 当前版本：`v1.0.1 beta`
+- 基线类型：薄核心、强合同、高扩展空间
+- 状态：已冻结为独立 beta 基线
+- 回滚锚点：`v1.0.0`
 
-- `.github/workflows/validate.yml`：GitHub Actions 自动校验
-- `.openclaw_skill/SKILL.md`：OpenClaw Skill 入口
+## 开发规范入口
 
-### 辅助文档
+这套仓库级规范可以从两条线读取，并且两条线保持一致：
 
-- [docs/README.md](docs/README.md)：文档中心
+- 文档入口：[`../harness_core/BOUNDARIES.md`](../harness_core/BOUNDARIES.md)
+- 程序入口：`harness_core.describe_development_guidance()`
 
-## 快速上手
+其中：
+
+- `core.py` 说明核心边界怎么冻结
+- `markers.py` 说明关键路径、关键变量和关键耦合怎么标记
+- `rendering.py` 说明这些标记如何渲染到 `INDEX.md` / `SPEC.md`
+- `validate_module.py` 说明这些标记如何被校验
+- `describe_extension_guidance()` 说明扩展层怎么保持边界
+- `describe_adapter_protocol()` 说明外部接入翻译层的最小协议
+
+## 仍未收口的事项
+
+下面这些属于后续继续补齐的入口，暂时不并入 `core`：
+
+- `adapters/` 下的具体适配器示例
+- 更复杂的 OS / 多 agent / 外部项目接入示例
+- 更细的 profile pack / template pack 组织方式
+- 更完整的 adapter 校验矩阵
+
+这些内容优先保留为说明文档和样例，不先做成厚平台。
+
+## 快速开始
 
 ### 初始化新模块
 
 ```bash
-python tools/init_module.py <module_name> [--path <output_dir>]
+python tools/init_module.py my_module
 ```
 
-默认会生成：
-
-- `INDEX.md`
-- `SPEC.md`
-- `CHANGELOG.md`
-- `src/main.py`
-- `tests/smoke.py`
-- `configs/default.json`
-
-### 为现有模块补 Harness
+### 为现有模块补齐 harness
 
 ```bash
-python tools/apply_harness.py <module_path>
-python tools/apply_harness.py <module_path> --profile python-service
+python tools/apply_harness.py path/to/module
+python tools/apply_harness.py path/to/module --profile python-service
 ```
 
 ### 校验模块
 
 ```bash
-python tools/validate_module.py <module_path>
-python tools/validate_module.py <module_path> --strict
-python tools/validate_module.py <module_path> --strict --profile python-service
+python tools/validate_module.py path/to/module
+python tools/validate_module.py path/to/module --strict
+python tools/validate_module.py path/to/module --strict --profile python-service
 ```
 
 ### 运行示例
 
 ```bash
 python examples/hello_world/tests/smoke.py
-python examples/user_service/tests/smoke.py
+python examples/local_extension/harness/run_harness.py
 ```
 
-## 接入现有模块
+## OpenHarness Bridge
 
-1. 先读模块自己的 `INDEX.md`
-2. 再读模块自己的 `SPEC.md`
-3. 只按任务读取相关代码文件
-4. 修改实现时同步更新 `SPEC.md` 和 `INDEX.md`
-5. 补好 `tests/smoke.py`
-6. 运行 `tools/validate_module.py <module_path>`
-7. 变更行为时更新 `CHANGELOG.md`
+- [OPENHARNESS_BRIDGE.md](OPENHARNESS_BRIDGE.md)
+- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md](OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
+- [OPENHARNESS_SDK_BINDING.md](OPENHARNESS_SDK_BINDING.md)
+- [OPENHARNESS_EXTERNAL_VERIFY.md](OPENHARNESS_EXTERNAL_VERIFY.md)
+- [OPENHARNESS_BRIDGE_OPEN_ITEMS.md](OPENHARNESS_BRIDGE_OPEN_ITEMS.md)
+- [OPENHARNESS_BRIDGE_INDEX.md](OPENHARNESS_BRIDGE_INDEX.md)
 
-## 版本信息
+## OpenHarness 外部复核
 
-- 当前版本：`v1.0.1 beta`
-- 规范版本：`v1.0`
-- 当前状态：可运行、可验证、适合当前仓库默认展示
-- 最后更新：2026-04-06
+- 外部验证目录：`C:/Users/Y2516/Desktop/openharness_app_external_verify`
+- 已验证：`@openharness/core@0.6.0` `Agent` 可实例化
+- 已验证：`Agent.run(...)` 可用本地 mock model 干跑
+- 已验证：`harness_validate` 可通过 process transport 被外部 OpenHarness app 调用
+- 已验证：`provider_hints` / `middleware_hints` 仍停留在 bridge 层

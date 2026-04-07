@@ -64,9 +64,9 @@
 
 当前固定的协议骨架：
 
-- `CORE_PROTOCOL.md`
-- `ADAPTER_PROTOCOL.md`
-- `EXTENSION_PROTOCOL.md`
+- `docs/CORE_PROTOCOL.md`
+- `docs/ADAPTER_PROTOCOL.md`
+- `docs/EXTENSION_PROTOCOL.md`
 
 ### 受控的扩展空间
 
@@ -135,9 +135,9 @@ OpenHarness 更适合做下游，因为它擅长运行 agent。
 
 相关入口：
 
-- [OPENHARNESS_BRIDGE.md](OPENHARNESS_BRIDGE.md)
-- [OPENHARNESS_SDK_BINDING.md](OPENHARNESS_SDK_BINDING.md)
-- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md](OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
+- [OPENHARNESS_BRIDGE.md](docs/OPENHARNESS_BRIDGE.md)
+- [OPENHARNESS_SDK_BINDING.md](docs/OPENHARNESS_SDK_BINDING.md)
+- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md](docs/OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md)
 - [docs/OPENHARNESS_EXTERNAL_VERIFY.md](docs/OPENHARNESS_EXTERNAL_VERIFY.md)
 - [docs/OPENHARNESS_BRIDGE_INDEX.md](docs/OPENHARNESS_BRIDGE_INDEX.md)
 
@@ -164,20 +164,18 @@ OpenHarness 更适合做下游，因为它擅长运行 agent。
 
 - `harness_core/`
 - `tools/`
-- `CORE_PROTOCOL.md`
-- `ADAPTER_PROTOCOL.md`
-- `EXTENSION_PROTOCOL.md`
 
 ### Docs
 
-- `README.md`
-- `README.zh.md`
-- `INDEX.md`
-- `HARNESS_SPEC.md`
-- `VERSION_ROADMAP.md`
-- `DESIGN_REVIEW.md`
-- `AI_CHECKLIST.md`
-- `AI_OPERATIONS.md`
+- `docs/CORE_PROTOCOL.md`
+- `docs/ADAPTER_PROTOCOL.md`
+- `docs/EXTENSION_PROTOCOL.md`
+- `docs/INDEX.md`
+- `docs/HARNESS_SPEC.md`
+- `docs/VERSION_ROADMAP.md`
+- `docs/DESIGN_REVIEW.md`
+- `docs/AI_CHECKLIST.md`
+- `docs/AI_OPERATIONS.md`
 
 ### Extensions
 
@@ -195,8 +193,8 @@ OpenHarness 更适合做下游，因为它擅长运行 agent。
 
 ### Release
 
-- `GITHUB_RELEASE.md`
-- `RELEASE_NOTES_v1.0.1_beta.md`
+- `docs/GITHUB_RELEASE.md`
+- `docs/RELEASE_NOTES_v1.0.1_beta.md`
 - `release/v1.0.1-beta/`
 
 ## 快速开始
@@ -273,8 +271,8 @@ npm run smoke
 
 ## 发布入口
 
-- [GITHUB_RELEASE.md](GITHUB_RELEASE.md)
-- [RELEASE_NOTES_v1.0.1_beta.md](RELEASE_NOTES_v1.0.1_beta.md)
+- [GITHUB_RELEASE.md](docs/GITHUB_RELEASE.md)
+- [RELEASE_NOTES_v1.0.1_beta.md](docs/RELEASE_NOTES_v1.0.1_beta.md)
 - [release/v1.0.1-beta/README.md](release/v1.0.1-beta/README.md)
 - [release/v1.0.1-beta/VERSION_DESCRIPTION.zh.md](release/v1.0.1-beta/VERSION_DESCRIPTION.zh.md)
 - [release/v1.0.1-beta/PUBLISH_CHECKLIST.zh.md](release/v1.0.1-beta/PUBLISH_CHECKLIST.zh.md)

@@ -1,4 +1,4 @@
-# Harness AI Operations Guide
+# Harness AI Operations Guide v1.0.1 beta
 
 This guide describes how to work on a module in this repository without losing the Harness contract.
 
@@ -29,12 +29,23 @@ python tools/validate_module.py path/to/module --strict --profile python-service
 - do not change the module contract without updating `SPEC.md`
 - do not change key module files without updating `INDEX.md`
 - do not skip the smoke test
-- do not treat the validator as a replacement for behavior review
+- do not turn the kernel into a thick framework
 
 ## If A Module Is Missing Harness Files
 
 Use `apply_harness.py` to add the missing skeleton files, then edit the generated docs to match the real module behavior.
 
-## Status
+## `1.0.1 beta` Status
 
-The repository is Python-first today. Future cross-language support should be added as a separate, explicit extension rather than implied by these instructions.
+The repository is now frozen as a thin, contract-driven beta baseline. Future changes must stay within the four-layer model:
+
+- `kernel`
+- `contract`
+- `extension`
+- `override`
+
+## OpenHarness Boundary
+
+- OpenHarness integration remains bridge-side, not core-side.
+- Treat bridge and binding files as external integration artifacts.
+- Do not move provider, middleware, session, or runtime ownership into `harness_core`.

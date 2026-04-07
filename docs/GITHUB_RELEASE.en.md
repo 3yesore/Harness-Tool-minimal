@@ -1,58 +1,70 @@
 # GitHub Release Guide
 
-This is the release-prep page for the cleaned-up staging repository. Before publishing, keep the root tidy, verify the example module, and make sure the skill package matches the current implementation.
+This file defines the repository-level release wording. It does not replace the `release/v1.0.1-beta/` package.
 
-## Pre-release Checklist
+## Unified Release Story For v1.0.1 beta
 
-1. Run the repository validators.
-2. Confirm `examples/hello_world` still passes smoke testing.
-3. Make sure no temporary files, caches, or local build artifacts remain.
-4. Sync `.openclaw_skill/` with the current implementation.
+`Harness Tool Minimal v1.0.1 beta` should be released with this story:
 
-Recommended checks:
+- `harness_tool` is the upstream, contract-first base
+- `harness_core` owns only protocol, validation, stages, and scaffold semantics
+- OpenHarness compatibility stays in the bridge / binding layer
+- external verification proves compatibility, not runtime ownership
 
-```bash
-python tools/validate_module.py examples/hello_world --strict --profile python-service
-python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service
-python -m py_compile tools/init_module.py tools/apply_harness.py tools/validate_module.py
-```
+## What This Release Can Claim
 
-## Publish to GitHub
+- the core / contract baseline is frozen
+- templates, profiles, examples, and the OpenClaw skill mirror are aligned
+- an OpenHarness-compatible bridge / binding path exists
+- a repo-external OpenHarness app verification path exists
 
-```bash
-git status --short
-git add .
-git commit -m "Prepare harness tool release"
-git push
-```
+## What This Release Must Not Claim
 
-If the publish repository is separate from this staging repository, copy the reviewed contents there first, then repeat the same checks.
+- no full OpenHarness runtime integration
+- no live provider wiring
+- no live middleware wiring
+- no `harness_core` runtime ownership
 
-## Suggested Release Notes
+## Suggested Release Summary
 
 ```markdown
 ## Harness Tool Minimal v1.0.1 beta
 
+This release freezes the current contract-first baseline instead of turning the project into a thicker platform.
+
 Highlights:
-- module handoff flow with `INDEX.md`, `SPEC.md`, and `CHANGELOG.md`
-- runnable smoke-test validation
-- profile-based rule presets
-- bundled OpenClaw / Codex skill package
-- reference examples in `examples/`
+- upstream contract-first base
+- thin `harness_core` with explicit protocol boundaries
+- synced OpenClaw skill mirror
+- OpenHarness-compatible bridge and binding layer
+- repo-external OpenHarness verification
 
-Skill install:
-- download the ZIP archive directly from GitHub
-- copy `.openclaw_skill` into your local skill directory
-- if your skill manager supports name-based install, publish the package there too
-
-Validation:
-- `python tools/validate_module.py examples/hello_world --strict --profile python-service`
-- `python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service`
+Notes:
+- OpenHarness compatibility remains bridge-side
+- external verification is compatibility evidence, not runtime ownership
+- live provider/middleware wiring is still intentionally out of scope
 ```
 
-## After Release
+## Pre-Release Checks
 
-1. Tag the release, for example `v1.0.1-beta`.
-2. Add a short GitHub release description.
-3. Verify that the README, release page, and skill package still match the published behavior.
-4. Update `VERSION_ROADMAP.en.md` if the roadmap changed.
+```bash
+python tools/validate_module.py examples/hello_world --strict --profile python-service
+python tools/validate_module.py examples/local_extension --strict --profile default
+python tools/validate_module.py examples/openharness_app --strict --profile default
+python .openclaw_skill/scripts/validate_harness.py examples/hello_world --strict --profile python-service
+```
+
+External OpenHarness verification:
+
+```bash
+cd C:/Users/Y2516/Desktop/openharness_app_external_verify
+npm run build
+npm run smoke
+```
+
+## Release Sequence
+
+1. finish the freeze-group commits
+2. tag `v1.0.1-beta`
+3. publish the release package
+4. if anything is contributed upstream to OpenHarness later, keep it narrow: docs, examples, and compatibility notes

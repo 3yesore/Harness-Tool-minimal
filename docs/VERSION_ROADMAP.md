@@ -3,12 +3,10 @@
 ## Current Version
 
 - `v1.0.1 beta`
-- Status: beta freeze, ready for GitHub publication
-- Focus: single-module maintenance, smoke-test validation, and OpenClaw skill packaging
-- Homepage: defaults to the `v1.0.1 beta` README
-- Historical anchor: `v1.0.0`
+- Status: frozen minimal baseline
+- Focus: thin kernel, hard contract, explicit extension surface, isolated rollback anchor
 
-## What v1.0 Includes
+## What v1.0.1 beta Includes
 
 - `HARNESS_SPEC.md`
 - `tools/init_module.py`
@@ -18,36 +16,49 @@
 - `profiles/`
 - `examples/hello_world/`
 - `.openclaw_skill/`
+- `RELEASE_NOTES_v1.0.1_beta.md`
+- OpenHarness-compatible bridge and external verification
+
+## What the Beta Freeze Means
+
+- keep the core small
+- do not turn validation into a heavy analysis platform
+- do not turn profiles into a policy engine
+- do not turn templates into a tutorial system
+- keep extension and override explicit and safe
+- keep OpenHarness integration in the bridge layer
 
 ## Planned Direction
 
-### v2.0 Fetcher
+### v1.1
 
-Goal: make the tool more adaptive for real projects.
-
-Likely additions:
-- better source-file discovery
-- improved profile differentiation
-- deeper module analysis
-- broader template coverage
-
-### v3.0 Intruder
-
-Goal: support larger projects and stronger automation.
+Goal: extend the same harness kernel with clearer project-local customization.
 
 Likely additions:
-- CI integration
-- multi-module orchestration
-- team workflow support
-- audit-friendly reporting
+
+- richer project-local override
+- more profile presets
+- safer apply/update path
+- clearer bridge-side validation reporting
+
+### v2.0
+
+Goal: broaden the same contract without losing the minimal baseline.
+
+Likely additions:
+
+- better source discovery
+- additional language presets
+- broader validation reporting
+- possibly richer external integration evidence, still outside `core`
 
 ## Release Policy
 
-- Keep `v1.x` backwards compatible with the current module layout
+- Keep `v1.x` backward compatible with the current module layout
 - Keep the skill package synced with repository behavior
-- Prefer incremental changes that can be validated with the example module
+- Preserve the `1.0.1 beta` baseline as the rollback anchor
 
 ## Notes
 
-- The roadmap describes intent, not committed functionality.
+- This roadmap describes intent, not a promise of immediate implementation.
 - If the implementation changes, update this file together with `INDEX.md` and `HARNESS_SPEC.md`.

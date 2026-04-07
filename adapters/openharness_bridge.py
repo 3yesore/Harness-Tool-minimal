@@ -453,7 +453,7 @@ class OpenHarnessBridgeAdapter:
                 ),
             },
             "references": {
-                "bridge_spec": "OPENHARNESS_BRIDGE.md",
+                "bridge_spec": "docs/OPENHARNESS_BRIDGE.md",
                 "open_items": "docs/OPENHARNESS_BRIDGE_OPEN_ITEMS.md",
                 "work_index": "docs/OPENHARNESS_BRIDGE_INDEX.md",
             },

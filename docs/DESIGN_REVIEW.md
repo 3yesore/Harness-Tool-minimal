@@ -1,93 +1,93 @@
-# Harness Tool 设计审视
+# Harness Tool 设计复核
 
-## 当前 Minimal 版本核心价值
+## 当前 `v1.0.1 beta` 的核心价值
 
-✅ **已做好的**：
-1. 核心规范清晰（INDEX.md + SPEC.md）
-2. 三个工具完整（init / validate / apply）
-3. 完整示例（hello_world）
-4. 扩展点预留（profiles / rules）
-5. 文档完备（SPEC / README / INDEX）
+1. 核心协议已经稳定在 `INDEX.md`、`SPEC.md`、smoke test 和 `validate` 这一条主合同路径上。
+2. `init / apply / validate` 已统一回到同一套核心模型。
+3. 示例模块可运行，并且能作为最小参考路径。
+4. `templates/` 与 `profiles/` 已形成明确扩展面。
+5. `v1.0.1 beta` 已经是独立冻结基线。
 
-## 潜在问题与优化方向
+## 当前允许继续加强的方向
 
-### 1. 对大模型是否太重？
+### 1. 文档与协议入口统一
 
-**当前情况**：
-- HARNESS_SPEC.md: 3.5KB，约 140 行
-- SKILL.md: 4.4KB，约 150 行
-- 总规范文档: ~8KB
+- 统一中英文主入口
+- 统一协议地图
+- 统一 “contract-first + bridge-side” 的仓库定位
 
-**评估**：
-- ✅ 对于 Claude/GPT-4 级别模型，8KB 规范文档完全可接受
-- ✅ 规范已经很精简，没有冗余
-- ⚠️ 但 AI 每次都要读完整规范可能浪费 token
+### 2. 版本基线与回滚锚点
 
-**优化方案**：
-- 在 SKILL.md 增加"快速参考卡"（Quick Reference）
-- 把最常用的 5 个操作浓缩到 20 行以内
-- AI 可以先读快速参考，需要时再读完整规范
+- 明确 `v1.0.1 beta`
+- 保留回滚锚点
+- 区分核心基线与桥接验证
 
-### 2. 工具实用性
+### 3. 收紧 validate 的表达，不扩 scope
 
-**当前缺失**：
-- ❌ 没有"diff"功能（对比模块变化）
-- ❌ 没有批量操作（一次处理多个模块）
+- 保持文档章节校验准确
+- 保持 smoke test 执行稳定
+- 保持错误输出可读
+- 不把 `validate` 做成厚分析平台
 
-**当前判断**：
-- 自动修复器不是 Minimal 的优先项
-- 更合理的做法是提供高质量修复指引，让 AI 按规范自行完成修复
+### 4. 保持 templates / profiles 的轻量边界
 
-**优化方案**：
-- 提供 `AI_REPAIR_GUIDE.md`，统一 AI 修复路径
-- 增强 apply：`--update` 更新已有文档而非跳过
-- 保持轻量：不做复杂的代码分析
+- 模板只提供安全默认值
+- profile 只提供轻量预设
+- 不把 profile 发展成 policy engine
 
-### 3. 示例完整性
+### 5. 保持 `.openclaw_skill/` 同步
 
-**当前情况**：
-- hello_world 很简单，但可能太简单
-- 缺少"真实场景"示例
+- 让 skill mirror 与主合同一致
+- 避免 mirror 漂移出第二套语义
 
-**优化方案**：
-- 保持 hello_world 作为最小示例
-- 增加一个"中等复杂度"示例（有配置、有依赖、有错误处理）
+## 当前禁止继续扩张的方向
 
-### 4. AI 友好性
+### 1. 把 kernel 做厚
 
-**当前问题**：
-- INDEX.md 和 SPEC.md 的"TODO"标记对 AI 不够明确
-- 缺少"AI 维护检查清单"
+- 不引入业务运行时到 kernel
+- 不把 kernel 做成大平台
 
-**优化方案**：
-- 模板中的 TODO 改为更明确的提示
-- 增加 AI_CHECKLIST.md（AI 维护模块时的检查清单）
+### 2. 过度源码分析
 
-## 建议优化优先级
+- 不把全仓库语义理解塞进核心
+- 不把 AST / 深度分析做成默认路径
 
-### P0（必做）：
-1. ✅ 扩展点预留（已完成）
-2. 🔧 增加快速参考卡到 SKILL.md
-3. 🔧 validate 增加 --fix 自动修复
+### 3. 默认自动修复
 
-### P1（推荐）：
-4. 🔧 增加中等复杂度示例
-5. 🔧 AI_CHECKLIST.md
+- 不把 validator 做成强修复器
+- 不让默认路径隐式改动模块结构
 
-### P2（可选）：
-6. apply 增加 --update 模式
-7. 批量操作工具
+### 4. 过厚规则系统
 
-## 保持轻量的边界
+- 不把 profile 变成 policy engine
+- 不引入复杂继承和冲突合并
 
-**不做**：
-- ❌ 不做自动代码理解（太重）
-- ❌ 不做复杂依赖分析（留给 Standard）
-- ❌ 不做 CI 集成（留给 Enterprise）
-- ❌ 不引入外部依赖（保持纯 Python 标准库）
+### 5. 模板教程化
 
-**原则**：
-- 单个工具 < 300 行
-- 总代码 < 1000 行
-- 总大小 < 100KB
-- 零外部依赖
+- 不把模板写成教学手册
+- 不让模板承担解释整个系统的职责
+
+### 6. 让 OpenHarness runtime 进入 core
+
+- 不把 provider / middleware / session / runtime ownership 移进 `harness_core`
+- OpenHarness 只保留 bridge-side 接入
+
+## 性能底线
+
+- 默认路径保持简短
+- 脚手架保持明确
+- 验证输出可读
+- 不引入重型运行时依赖
+
+## Harness 判断标准
+
+- 合同明确
+- 入口稳定
+- 验证可跑
+- 可交接
+- 可扩展
+- 边界清楚
+
+## 结论
+
+`v1.0.1 beta` 当前的方向仍然正确：强调 hard contract、thin core、large extension surface，并把 OpenHarness 兼容性保持在外层 bridge / binding 路径，不改变 `harness_tool` 的上游定位。

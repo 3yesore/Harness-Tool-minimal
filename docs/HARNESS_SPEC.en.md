@@ -1,194 +1,159 @@
-# Harness Specification v1.0
+# Harness Specification v1.0.1 beta
 
-## What Harness Means Here
+## Goal
 
-In this repository, Harness is a module-maintenance contract. It is not a full framework or package manager. The goal is to keep the important maintenance context in a few files so that a human or AI can take over quickly.
+`Harness Tool Minimal` is a `harness kernel`, not a thick platform. Its job is to collect responsibilities, interfaces, validation, and handoff information into a small set of fixed files so people and AI stay aligned during development, integration, evolution, and maintenance.
 
-This repository focuses on:
+## Four Layers
 
-- a clear `INDEX.md`
-- a clear `SPEC.md`
-- a runnable smoke test
-- lightweight automation
-- low handoff cost
+### 1. Core
+`core` only handles mechanisms, not project business semantics.
 
-## Current Repository Scope
+`core` freezes:
+- `ModuleContext`
+- `ContractRules`
+- `ValidationResult`
+- `ScaffoldPlan`
+- `Discovery -> Contract -> Validate -> Suggest`
 
-The implementation is currently Python-first, but the repository itself is module-oriented rather than tied to a specific business domain.
+`core` does not handle:
+- OS runtime integration
+- multi-agent scheduling
+- external project translation
+- thick platform behavior
 
-Implemented today:
+### 2. Adapter
+`adapter` is the outer translation layer for external integration.
 
-- `tools/init_module.py` creates a module skeleton
-- `tools/apply_harness.py` adds Harness files and a smoke test to an existing module
-- `tools/validate_module.py` validates docs, configs, and `tests/smoke.py`
-- `profiles/` is wired into the CLI through `--profile`
-- `.openclaw_skill/` packages the same workflow as a skill
+`adapter` freezes:
+- `name`
+- `version`
+- `type`
+- `scope`
+- `entrypoint`
+- `capabilities`
+- `protocol_version`
+- `required_core_version`
 
-Deep language-agnostic support is not implemented yet, so non-Python modules still need extra work.
+`adapter` supports:
+- `discover()`
+- `attach()`
+- `adapt()`
+- `execute()`
+- `teardown()`
 
-## Core Principles
+`adapter` outputs:
+- `adapted_context`
+- `capability_report`
+- `warnings`
+- `errors`
 
-### 1. Index First
+`adapter` does not:
+- decide module legality
+- replace `core contract`
+- swallow `extension` protocol
+- become a thick platform
 
-- Every maintained module should have an `INDEX.md`
-- `INDEX.md` should explain responsibilities, key files, dependencies, and the validation entry point
-- AI should read the index before scanning code
+### 3. Extension
+`extension` handles local differences without breaking the contract.
 
-### 2. Contract Driven
+It includes:
+- `profiles`
+- `templates`
+- `marker`
+- `override`
 
-- `SPEC.md` should define inputs, outputs, configuration, and error handling
-- If the interface changes, the spec should change first
-- Implementation should stay aligned with the spec
+It may soften:
+- default values
+- wording
+- presets
+- local wrappers
+- directory preferences
 
-### 3. Minimal Context
+It may not:
+- bypass `validate`
+- change protocol field meaning
+- break `core contract`
+- masquerade as `core`
 
-- Keep maintenance-critical information in a small number of files
-- Avoid repeating the same explanation across many docs
-- Read only the code needed for the task
+### 4. Override
+`override` only changes local defaults; it may not break boundaries.
 
-### 4. Verifiable
+## Workflow Stages
 
-- Every module should have `tests/smoke.py`
-- Validation should actually run the smoke test, not just check formatting
-- Success and failure should be explicit
+Freeze these four stages:
+- `Discovery`
+- `Contract`
+- `Validate`
+- `Suggest`
 
-### 5. Handoff Ready
+Meaning:
+- `Discovery` discovers structure
+- `Contract` validates docs, markers, and entry consistency
+- `Validate` runs smoke tests, config checks, and recommended checks
+- `Suggest` emits gaps, extension advice, and patch drafts
 
-- Another maintainer should be able to recover the module from `INDEX.md`, `SPEC.md`, and the smoke test
-- Change history should be traceable
-- Key files should stay discoverable
+## Minimum Contract Shape
 
-## Required Module Layout
+A module should at least have:
+- `INDEX.md`
+- `SPEC.md`
+- `tests/smoke.py`
+- `CHANGELOG.md`
 
-```text
-module_name/
-├── INDEX.md
-├── SPEC.md
-└── tests/
-    └── smoke.py
-```
+Recommended:
+- `configs/default.json`
+- `src/main.py`
+- extra marker guidance
 
-## Recommended Files
+## Protocol Map
 
-```text
-module_name/
-├── CHANGELOG.md
-├── src/
-├── configs/
-└── docs/
-```
+Repository-level guidance stays aligned through:
+- Document entry: [`../harness_core/BOUNDARIES.md`](../harness_core/BOUNDARIES.md)
+- Extension entry: [`../harness_core/EXTENSIONS.md`](../harness_core/EXTENSIONS.md)
+- Protocol files:
+  - [`CORE_PROTOCOL.md`](CORE_PROTOCOL.md)
+  - [`ADAPTER_PROTOCOL.md`](ADAPTER_PROTOCOL.md)
+  - [`EXTENSION_PROTOCOL.md`](EXTENSION_PROTOCOL.md)
 
-## INDEX.md Contract
+## Minimum Validation Gate
 
-The `INDEX.md` file should contain at least:
+### Must check
+- required files exist
+- required sections exist
+- entry exists
+- marker core keys exist
+- smoke tests are runnable
+- config files parse
 
-- `## Responsibilities`
-- `## Key Files`
-- `## Dependencies`
-- `## Quick Validation`
+### Soft hints
+- marker wording
+- template layout preferences
+- profile default values
+- local wrapper shape
+- directory preferences
 
-Recommended extras:
+## Open Items
 
-- `## Maintenance Notes`
-- `## Last Updated`
+Keep these as docs and samples for now, not part of `core`:
+- concrete adapter examples under `adapters/`
+- OS / multi-agent / external project demos
+- a fuller adapter validation matrix
+- more versioned pack rules
 
-The quick validation section should point to a real command, ideally:
+## Version Principle
 
-```bash
-python tests/smoke.py
-```
+- `v1.0.1 beta` is an independently frozen baseline
+- older versions remain historical references
+- future extensions must respect the current contract
+- default stays `soft`, but the soft rules are built on frozen protocol, not on ad hoc documentation
 
-## SPEC.md Contract
+## OpenHarness External Verification
 
-The `SPEC.md` file should contain at least:
+The current bridge / SDK binding has been re-checked in a repo-external
+OpenHarness app:
 
-- `## Input`
-- `## Output`
-- `## Configuration`
-- `## Error Handling`
-- `## Example`
-
-The spec should be specific enough that a maintainer can tell what is allowed, what is rejected, and what success looks like.
-
-## Smoke Test Contract
-
-The smoke test should:
-
-- run with `python tests/smoke.py`
-- exit with code `0` on success
-- print a clear success or failure message
-- cover the module's main path
-
-The current validator executes `tests/smoke.py` when it exists.
-
-## Validation Rules
-
-Current `tools/validate_module.py` behavior:
-
-- checks for `INDEX.md` and `SPEC.md`
-- warns if `CHANGELOG.md` is missing
-- checks required sections in `INDEX.md`
-- checks required sections in `SPEC.md`
-- validates JSON files in `configs/`
-- checks that `tests/` exists and contains at least one `.py` file
-- runs `tests/smoke.py`
-- applies additional checks from `--profile`
-
-Current `tools/apply_harness.py` behavior:
-
-- reads the module directory structure
-- generates `INDEX.md`, `SPEC.md`, and `CHANGELOG.md` when missing
-- creates recommended directories from the active profile
-- creates `tests/smoke.py` when the tests directory is missing or empty
-
-## Profile Support
-
-Profile support is wired through `--profile`.
-
-Current rule files:
-
-- `profiles/default.rules.json`
-- `profiles/python-service.rules.json`
-
-Profiles are currently used for:
-
-- required files
-- recommended files
-- recommended directories
-- required `INDEX.md` / `SPEC.md` sections
-
-The profiles are intentionally lightweight and mostly mirror the default behavior.
-
-## Current Limitations
-
-- The repository is Python-first
-- `apply_harness.py` still uses heuristics instead of deep source analysis
-- Validation is structural plus smoke execution, not full semantic verification
-- Non-Python modules still need additional design
-
-## AI Workflow
-
-When maintaining a Harness module:
-
-1. Read the module's `INDEX.md`
-2. Read the module's `SPEC.md`
-3. Read only the code files needed for the task
-4. Update the spec when the interface changes
-5. Run `tests/smoke.py`
-6. Run `tools/validate_module.py`
-7. Update `CHANGELOG.md` when behavior changes
-
-## Versioning and Direction
-
-- Current spec version: `v1.0`
-- Current goal: usable, verifiable, handoff-ready
-- Next direction: better source discovery, richer profile differences, more language support
-
-## References
-
-- [INDEX.en.md](INDEX.en.md)
-- [README.en.md](README.en.md)
-- [tools/validate_module.py](tools/validate_module.py)
-- [tools/apply_harness.py](tools/apply_harness.py)
-- [profiles/README.md](profiles/README.md)
-- [.openclaw_skill/SKILL.md](.openclaw_skill/SKILL.md)
+- `Agent` instantiation passes
+- `Agent.run(...)` mock dry-run passes
+- `harness_validate` process transport passes
+- `provider_hints` / `middleware_hints` remain bridge contract data and do not enter `core`

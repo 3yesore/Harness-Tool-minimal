@@ -20,9 +20,9 @@ This folder is the thin, optional adapter layer for `harness_tool`.
 
 ## Entry points
 - `adapters.describe_adapter_protocol()`
-- `ADAPTER_PROTOCOL.md`
-- `CORE_PROTOCOL.md`
-- `EXTENSION_PROTOCOL.md`
+- `../docs/ADAPTER_PROTOCOL.md`
+- `../docs/CORE_PROTOCOL.md`
+- `../docs/EXTENSION_PROTOCOL.md`
 - `SAMPLES.md`
 - `adapters/os.py`
 - `adapters/multi_agent.py`
@@ -43,10 +43,10 @@ This folder is the thin, optional adapter layer for `harness_tool`.
 - Adapter validation is still minimal until the need becomes real
 
 ## OpenHarness Bridge
-- `OPENHARNESS_BRIDGE.md`
-- `OPENHARNESS_SDK_BINDING.md`
-- `OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md`
-- `docs/OPENHARNESS_BRIDGE_OPEN_ITEMS.md`
-- `docs/OPENHARNESS_BRIDGE_INDEX.md`
-- `docs/OPENHARNESS_SDK_BINDING_OPEN_ITEMS.md`
-- `docs/OPENHARNESS_SDK_BINDING_INDEX.md`
+- `../docs/OPENHARNESS_BRIDGE.md`
+- `../docs/OPENHARNESS_SDK_BINDING.md`
+- `../docs/OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md`
+- `../docs/OPENHARNESS_BRIDGE_OPEN_ITEMS.md`
+- `../docs/OPENHARNESS_BRIDGE_INDEX.md`
+- `../docs/OPENHARNESS_SDK_BINDING_OPEN_ITEMS.md`
+- `../docs/OPENHARNESS_SDK_BINDING_INDEX.md`

@@ -5,20 +5,20 @@
 ## 仓库主入口
 
 - `README.md`
-- `INDEX.md`
-- `HARNESS_SPEC.md`
-- `VERSION_ROADMAP.md`
-- `DESIGN_REVIEW.md`
-- `AI_CHECKLIST.md`
-- `AI_OPERATIONS.md`
-- `GITHUB_RELEASE.md`
-- `RELEASE_NOTES_v1.0.1_beta.md`
+- `docs/INDEX.md`
+- `docs/HARNESS_SPEC.md`
+- `docs/VERSION_ROADMAP.md`
+- `docs/DESIGN_REVIEW.md`
+- `docs/AI_CHECKLIST.md`
+- `docs/AI_OPERATIONS.md`
+- `docs/GITHUB_RELEASE.md`
+- `docs/RELEASE_NOTES_v1.0.1_beta.md`
 
 ## Core / Contract
 
-- `CORE_PROTOCOL.md`
-- `ADAPTER_PROTOCOL.md`
-- `EXTENSION_PROTOCOL.md`
+- `docs/CORE_PROTOCOL.md`
+- `docs/ADAPTER_PROTOCOL.md`
+- `docs/EXTENSION_PROTOCOL.md`
 - `harness_core/`
 - `tools/`
 - `templates/`
@@ -33,9 +33,9 @@
 
 ## OpenHarness Bridge
 
-- `OPENHARNESS_BRIDGE.md`
-- `OPENHARNESS_SDK_BINDING.md`
-- `OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md`
+- `docs/OPENHARNESS_BRIDGE.md`
+- `docs/OPENHARNESS_SDK_BINDING.md`
+- `docs/OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.md`
 - `adapters/`
 - `scripts/openharness_validate_transport.py`
 - `scripts/openharness_sdk_binding_export.py`

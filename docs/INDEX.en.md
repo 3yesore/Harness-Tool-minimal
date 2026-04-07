@@ -1,142 +1,113 @@
-# Harness Tool Main Index
+# Harness Tool Index
 
 ## Repository Overview
 
-Harness Tool Minimal currently defaults to `v1.0.1 beta`. It is a lightweight Harness Engineering repository for module development and maintenance. It keeps responsibilities, interfaces, validation, and handoff details in a small set of fixed files so both humans and AI can pick up work quickly.
+`Harness Tool Minimal` is a `harness kernel` repository for the full module development and maintenance lifecycle. It is not a thick framework or a package manager. It concentrates responsibilities, interfaces, validation, and handoff details into a small set of fixed files so people and AI stay aligned across development, integration, evolution, and maintenance.
 
-The current repository has a working minimal loop. Its core capabilities are:
+The repository is frozen at the `v1.0.1 beta` baseline. The principles are:
 
-- create a new module skeleton
-- retrofit an existing module with Harness files
-- validate module docs, configuration, and smoke tests
-- use `profiles/` for lightweight rule presets
-- package the same workflow as an OpenClaw / Codex skill
-- run basic GitHub Actions validation
+- `core` stays mechanism-only
+- `contract` defines legality
+- `adapter` translates external integration
+- `extension` provides default presets and templates
+- `override` allows local customization without breaking the contract
 
-## Repository Layout
+## Protocol Map
 
-```text
-harness_tool/
-├── README.md
-├── README.en.md
-├── HARNESS_SPEC.md
-├── HARNESS_SPEC.en.md
-├── INDEX.md
-├── INDEX.en.md
-├── VERSION_ROADMAP.md
-├── VERSION_ROADMAP.en.md
-├── GITHUB_RELEASE.md
-├── GITHUB_RELEASE.en.md
-├── LICENSE
-├── docs/
-│  ├── README.md
-│  ├── README.en.md
-│  ├── AI_CHECKLIST.md
-│  ├── AI_REPAIR_GUIDE.md
-│  ├── CONTRIBUTING.md
-│  ├── DESIGN_REVIEW.md
-│  ├── FAQ.md
-│  ├── GITHUB_PUBLISH_GUIDE.md
-│  ├── RELEASE_NOTES_v1.0.md
-│  ├── AI_OPERATIONS.md
-│  ├── AI_OPERATIONS.en.md
-│  ├── EXTENSION_POINTS.md
-│  ├── EXTENSION_POINTS.en.md
-│  └── ...
-├── .github/
-│  └── workflows/validate.yml
-├── templates/
-├── tools/
-├── examples/
-├── profiles/
-└── .openclaw_skill/
-```
+- [CORE_PROTOCOL.md](CORE_PROTOCOL.md): frozen core envelope and workflow stages
+- [ADAPTER_PROTOCOL.md](ADAPTER_PROTOCOL.md): minimal external integration envelope
+- [EXTENSION_PROTOCOL.md](EXTENSION_PROTOCOL.md): project-local extension boundaries
+- [../adapters/README.md](../adapters/README.md): adapter workspace entry
+- [OPEN_ITEMS.en.md](OPEN_ITEMS.en.md): intentionally unfinished upgrade items
+- [WORK_INDEX.en.md](WORK_INDEX.en.md): organization-order index
+- [CURRENT_CHANGESET_INDEX.en.md](CURRENT_CHANGESET_INDEX.en.md): final cleanup index for the current changeset
 
-## Key Files
+## Three Layers
 
-### Guidance
+### 1. Core
+Only mechanisms, contracts, validation, and scaffold plans.
 
-- [HARNESS_SPEC.en.md](HARNESS_SPEC.en.md): repository-level Harness specification
-- [VERSION_ROADMAP.en.md](VERSION_ROADMAP.en.md): version plan
-- [GITHUB_RELEASE.en.md](GITHUB_RELEASE.en.md): GitHub release checklist
-- [RELEASE_PLAYBOOK.en.md](RELEASE_PLAYBOOK.en.md): the fixed workflow and wording-alignment guide for every new release
+### 2. Adapter
+Translates OS / multi-agent / external project differences into standard inputs.
+
+### 3. Extension
+Keeps `profiles / templates / marker / override` available for project-local differences.
+
+## Core Files
+
+### Specification and versioning
+- [HARNESS_SPEC.md](HARNESS_SPEC.md): repository contract and boundary rules
+- [VERSION_ROADMAP.md](VERSION_ROADMAP.md): version roadmap and freeze policy
+- [DESIGN_REVIEW.md](DESIGN_REVIEW.md): whitelist, blacklist, and performance floor
+- [AI_CHECKLIST.md](AI_CHECKLIST.md): AI handoff checklist
+- [GITHUB_RELEASE.md](GITHUB_RELEASE.md): release entry point
+- [RELEASE_NOTES_v1.0.1_beta.md](RELEASE_NOTES_v1.0.1_beta.md): current beta freeze note
+
+### Protocol files
+- [CORE_PROTOCOL.md](CORE_PROTOCOL.md): core protocol envelope
+- [ADAPTER_PROTOCOL.md](ADAPTER_PROTOCOL.md): adapter protocol envelope
+- [EXTENSION_PROTOCOL.md](EXTENSION_PROTOCOL.md): extension protocol envelope
 
 ### Tools
+- [../tools/init_module.py](../tools/init_module.py): create a new module scaffold
+- [../tools/apply_harness.py](../tools/apply_harness.py): add Harness structure to existing modules
+- [../tools/validate_module.py](../tools/validate_module.py): validate docs, configs, and smoke tests
 
-- [tools/init_module.py](tools/init_module.py): create a module skeleton
-- [tools/apply_harness.py](tools/apply_harness.py): retrofit an existing module
-- [tools/validate_module.py](tools/validate_module.py): validate structure and smoke tests
+## Extension Surface
 
-### Templates
+- `templates/`: default skeletons, only safe starting points
+- `profiles/`: lightweight presets for module-type differences
+- `adapters/`: adapter workspace for external integration envelopes
+- `.openclaw_skill/`: mirrored OpenClaw skill bundle
+- `examples/local_extension/`: local extension example
 
-- `templates/INDEX.md.template`
-- `templates/SPEC.md.template`
-- `templates/CHANGELOG.md.template`
-
-### Examples
-
-- `examples/hello_world/`: the smallest reference module
-- `examples/user_service/`: a more complex sample with multiple files and configs
-- `examples/local_extension/`: a local extension example that shows project-owned extensions
-
-### Profiles
-
-- `profiles/default.rules.json`
-- `profiles/python-service.rules.json`
-- `profiles/README.md`
-
-### Automation and Skill
-
-- `.github/workflows/validate.yml`
-- `.openclaw_skill/SKILL.md`
-
-### Supporting Docs
-
-- [docs/README.en.md](docs/README.en.md): documentation hub
-
-## Quick Start
-
-### Create a new module
-
-```bash
-python tools/init_module.py <module_name> [--path <output_dir>]
-```
-
-### Apply Harness to an existing module
-
-```bash
-python tools/apply_harness.py <module_path>
-python tools/apply_harness.py <module_path> --profile python-service
-```
-
-### Validate a module
-
-```bash
-python tools/validate_module.py <module_path>
-python tools/validate_module.py <module_path> --strict
-python tools/validate_module.py <module_path> --strict --profile python-service
-```
-
-### Run the examples
-
-```bash
-python examples/hello_world/tests/smoke.py
-python examples/user_service/tests/smoke.py
-```
-
-## Handoff Flow
-
-1. Read the module's `INDEX.md`
-2. Read the module's `SPEC.md`
-3. Read only the code files needed for the task
-4. Sync `SPEC.md` and `INDEX.md` when implementation changes
-5. Keep `tests/smoke.py` up to date
-6. Run `tools/validate_module.py <module_path>`
-7. Update `CHANGELOG.md` when behavior changes
-
-## Version Info
+## Version Information
 
 - Current version: `v1.0.1 beta`
-- Spec version: `v1.0`
-- Status: runnable, verifiable, and aligned with the default homepage
-- Last updated: 2026-04-06
+- Baseline type: thin core, hard contract, large extension space
+- Status: independently frozen baseline
+- Rollback anchor: `v1.0.0`
+
+## Development Entry
+
+This repository guidance is available from two aligned paths:
+
+- Document entry: [`../harness_core/BOUNDARIES.md`](../harness_core/BOUNDARIES.md)
+- Programmatic entry: `harness_core.describe_development_guidance()`
+
+In particular:
+
+- `core.py` explains how the core boundary is frozen
+- `markers.py` explains how key paths, variables, and coupling are marked
+- `rendering.py` explains how those markers are rendered into `INDEX.md` / `SPEC.md`
+- `validate_module.py` explains how those markers are validated
+- `describe_extension_guidance()` explains how the extension layer stays bounded
+- `describe_adapter_protocol()` explains the adapter envelope
+
+## Open Items
+
+The following are intentionally left open for later upgrades:
+
+- concrete adapter samples under `adapters/`
+- richer OS / multi-agent / external project integration demos
+- a fuller adapter validation matrix
+- more versioned profile/template pack rules
+
+These are kept as docs and examples first, not folded into a thick platform.
+
+## OpenHarness Bridge
+
+- [OPENHARNESS_BRIDGE.md](OPENHARNESS_BRIDGE.md)
+- [OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.en.md](OPENHARNESS_PROVIDER_MIDDLEWARE_CONTRACT.en.md)
+- [OPENHARNESS_SDK_BINDING.en.md](OPENHARNESS_SDK_BINDING.en.md)
+- [OPENHARNESS_EXTERNAL_VERIFY.en.md](OPENHARNESS_EXTERNAL_VERIFY.en.md)
+- [OPENHARNESS_BRIDGE_OPEN_ITEMS.en.md](OPENHARNESS_BRIDGE_OPEN_ITEMS.en.md)
+- [OPENHARNESS_BRIDGE_INDEX.en.md](OPENHARNESS_BRIDGE_INDEX.en.md)
+
+## OpenHarness External Verification
+
+- external verify repo: `C:/Users/Y2516/Desktop/openharness_app_external_verify`
+- verified: `@openharness/core@0.6.0` `Agent` instantiation
+- verified: `Agent.run(...)` dry-run with a local mock model
+- verified: `harness_validate` process transport from an external OpenHarness app
+- verified: `provider_hints` / `middleware_hints` remain bridge-only metadata

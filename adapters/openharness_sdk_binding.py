@@ -185,8 +185,8 @@ class OpenHarnessSdkBinding:
                 include_validation=include_validation,
             ),
             "references": {
-                "bridge_spec": "OPENHARNESS_BRIDGE.md",
-                "binding_spec": "OPENHARNESS_SDK_BINDING.md",
+                "bridge_spec": "docs/OPENHARNESS_BRIDGE.md",
+                "binding_spec": "docs/OPENHARNESS_SDK_BINDING.md",
                 "open_items": "docs/OPENHARNESS_SDK_BINDING_OPEN_ITEMS.md",
                 "work_index": "docs/OPENHARNESS_SDK_BINDING_INDEX.md",
             },
