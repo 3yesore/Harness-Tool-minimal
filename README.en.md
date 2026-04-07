@@ -1,9 +1,8 @@
-# Harness Tool 1.0.1
+# Harness Tool
 
-[English](README.md) | [中文](README.zh.md)
+`README.md` is the canonical English homepage for this repository.
 
-This file mirrors the English homepage. `README.md` is the canonical English entry.
+Use:
 
-For the full project overview, use:
-
-- [README.md](README.md)
+- [README.md](README.md) for the main entry
+- [README.zh.md](README.zh.md) for the Chinese entry
